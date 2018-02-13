@@ -98,6 +98,17 @@
 					}, 100);
 				});
 
+			/*
+					Custom search for joshwulf.com
+			*/
+			$('#search')
+				.on('submit', function(e) {
+					e.preventDefault();
+					var query = "https://www.google.com?q=site%3Awww.joshwulf.com+" +
+					$('#query').value;
+					window.location.href = query;
+				})
+
 		// Intro.
 			var $intro = $('#intro');
 

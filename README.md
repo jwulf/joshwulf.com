@@ -9,3 +9,5 @@ gulp dev
 ```
 
 The built / published website is in `/docs` and is served via GitHub pages with Cloudfront in front of it.
+
+The `docs` folder is hidden in VS Code via `File > Preferences > Workspace Settings`.
