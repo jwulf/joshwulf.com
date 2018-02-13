@@ -4,7 +4,7 @@ The website for www.joshwulf.com
 
 Edit the files in `/src` and run the task:
 
-```
+```bash
 gulp dev
 ```
 
