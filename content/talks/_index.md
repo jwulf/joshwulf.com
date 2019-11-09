@@ -24,6 +24,7 @@ date = "2014-04-10"
 * API Servers with NestJS - [BrisJS Meetup](https://www.meetup.com/BrisJS/events/fxdfkryzpbgb/)
 * Zeebe Deep-dive - [Platform Engineers Meetup, Sydney](https://www.meetup.com/Sydney-PE/events/264546925/)
 * Building Scalable (and maintainable) Microservices with JavaScript - [CampJS X](https://x.campjs.org/speakers)
+* Meet a Minecrafter - Mojang [[<i class='fab fa-youtube'></i> video](https://www.youtube.com/watch?v=8xbnDMuFdQ0)]
 * State Machines - [BrisJS Meetup](https://www.meetup.com/BrisJS/events/mhnwzqyzlbhb/)
 * How to get a job through contributing to Open Source - [Node Meetup](https://twitter.com/stephsocial_/status/1132938056460144640)
 * Coder Academy Mentor Session - [Coder Academy](https://twitter.com/ashlebug/status/1115860438493880320)
