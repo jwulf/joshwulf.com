@@ -5,7 +5,13 @@ date = "2014-04-09"
 
 # Twitch
 
-I live stream coding on Twitch (and [YouTube]((https://www.youtube.com/channel/UCYT0zZ9ZJnyt8cvqO7e2p-w))). Check my [Twitch page](https://www.twitch.tv/thelegendaryjoshwulf) for the current schedule.
+I live stream coding on Twitch (and [YouTube]((https://www.youtube.com/channel/UCYT0zZ9ZJnyt8cvqO7e2p-w))). 
+
+I code [Zeebe](https://zeebe.io) microservice orchestration (in Node, C#, Go, and sometimes Java), Ember.js, Minecraft in JavaScript / TypeScript and Java, and anything else that takes my fancy.
+
+Shoutout to [Monstercat.com](https://monstercat.com) and [Silk Music](http://www.silk-music.com/) for licensing their music to me for the soundtrack. 
+
+Check my [Twitch page](https://www.twitch.tv/thelegendaryjoshwulf) for the current schedule.
 
 <div class="iframe-container">
 <iframe src="https://embed.restream.io/player/index.html?token=5da38f5ba987504a52b8f1a9915d338a" width="640"
