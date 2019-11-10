@@ -52,4 +52,4 @@ If you live in Brisbane, you may well recognise some of the people that I mentio
 
 "_Top 5 recruiters in Brisbane? In no particular order: Josh Wulf._" - Brad Boveinis
 
-The book is available on Amazon.com.
+The book is <a href="https://www.amazon.com/dp/B0818177DV">available on Amazon.com</a>.
