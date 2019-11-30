@@ -3,8 +3,8 @@ author = "Josh Wulf"
 categories = ["book review", "quantum mechanics"]
 date = "2017-05-19"
 description = "A book review I wrote in 2014 on Robert Lanza’s “Biocentrism: How Life and Consciousness Are the Keys to Understanding the True Nature of the Universe”"
-featured = "biocentricism.jpeg"
-featuredalt = "Biocentricism"
+featured = "biocentrism.jpeg"
+featuredalt = "Biocentrism"
 featuredpath = "date"
 linktitle = ""
 title = "Biocentricism: How Life and Consciousness Are the Keys to Understanding the True Nature of the Universe"
@@ -18,7 +18,7 @@ After reading a lot on relativity, quantum mechanics, and consciousness, this is
 
 The Western scientific revolution was predicated on an ontology of objective things that had an existence independent of observers. The periodic table we encountered in high school science is a good example. It exists independent of the reader of the table or the observer of the elements. The observer is an afterthought, and superfluous to the elements, which have their own concrete existence.
 
-However, this view of the world — though utilitarian in that it produces technology such as the computer I am using to write this review — ignores that the entire ontological structure is in fact built through the very observation of the observer that it ignores.
+However, this view of the world — though utilitarian in that it produces technology such as the computer I am using to write this review — ignores that the entire ontological structure is, in fact, built through the very observation of the observer that it ignores.
 
 The book begins by examining the Zen-koan-like question:
 
