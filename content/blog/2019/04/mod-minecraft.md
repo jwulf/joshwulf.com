@@ -192,7 +192,7 @@ See the screencast below to see what it looks like when you run this command.
 ## Further Resources
 
 - [Magikcraft on GitHub](https://github.com/Magikcraft)
-- [Magikcraft on YouTube](https://www.youtube.com/channel/UC9cEOcTkQEyiKr2nCZDBYeg)
+- [Magikcraft on Twitch](/video)
 - [MCT1 Source Code (Example Plugin)](https://github.com/Magikcraft/mct1)
 - [ScriptCraft on GitHub](https://github.com/walterhiggins/ScriptCraft)
 - [Bukkit API Docs](https://bukkit.magikcraft.io/)
