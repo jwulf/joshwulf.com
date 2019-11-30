@@ -1,6 +1,6 @@
 +++
 author = "Josh Wulf"
-categories = ["javascript", "event"]
+categories = ["javascript", "events"]
 date = "2018-08-14"
 description = "This past weekend I was at CampJS with my son Prahlad, six of my co-workers from Credit Sense, and over 100 JavaScript enthusiasts and professionals from around Australia."
 featured = "there-and-back.jpeg"
