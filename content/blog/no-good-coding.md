@@ -126,4 +126,4 @@ Both of the following pieces of code do the same thing, but one is superior in i
 
 While writing unit tests, I discovered that my ternary string builder doesn’t work. Here’s the working code:
 
-{{< fancybox path="/img/2017/04" file="update.png" caption="Separate out I/O" gallery="Gallery Name" >}}
+{{< fancybox path="/img/2017/04" file="update.png" caption="Working implementation" gallery="Gallery Name" >}}

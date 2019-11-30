@@ -30,7 +30,7 @@ This is a central point of lean / agile development: light-weight experiments, f
 
 And we discovered our central premise along the way — that Flight Centre’s biggest problem is a lack of innovation agility around their data. They don’t currently have the means to iterate rapidly over disposable solutions: hence the API as our ultimate “product”.
 
-{{< fancybox path="/img/2017/03" file="gates.jpg" caption="Innovation agility is a significant competitive advantage" gallery="Gallery Name" >}}
+{{< fancybox path="/img/2017/03" file="gates.jpeg" caption="Innovation agility is a significant competitive advantage" gallery="Gallery Name" >}}
 
 Before the first pitches even began, we put in place our “push-to-publish” pipeline. It took us less than 30 minutes to get the central infrastructure in place that we used throughout the weekend: a GitHub repository linked to an [IBM Bluemix](https://bluemix.net/) DevOps Pipeline.
 
