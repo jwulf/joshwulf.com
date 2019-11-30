@@ -16,7 +16,7 @@ type = "post"
 
 Over the next 12–24 months — in other words, between 2018 and 2019 — how software developers are hired is going to change radically.
 
-I spent 2004–2014 working at Red Hat, the world’s largest open source software engineering company. On my very first day there, in July 2004, my boss Marty Messer said to me: “*All the work you do here will be in the open. In the future you won’t have a CV — people will just Google you.*”
+I spent 2004–2014 working at Red Hat, the world’s largest open-source software engineering company. On my very first day there, in July 2004, my boss Marty Messer said to me: “*All the work you do here will be in the open. In the future you won’t have a CV — people will just Google you.*”
 
 This was one of the unique characteristics of working at Red Hat at the time. We had the opportunity to create our own personal brands and reputation in the open. Communication with other software engineers through mailing lists and bug trackers, and source code commits to mercurial, subversion, and cvs repositories were all open and indexed by Google.
 

@@ -14,6 +14,7 @@ date = "2014-04-10"
 
 ## Upcoming Talks
 
+* Seeing is Believing: Creating Video Content for Users by live streaming on Twitch [LinuxConf AU 2020]
 * How live coding on Twitch made me a better developer - [BrisJS Meetup](https://www.meetup.com/BrisJS/events/fxdfkryzqbdb/)
 
 ## Previous Talks
@@ -21,7 +22,7 @@ date = "2014-04-10"
 ### 2019
 
 * Coder Academy Mentor Session - [Coder Academy](https://twitter.com/ashlebug/status/1192286109738225665)
-* API Servers with NestJS - [BrisJS Meetup](https://www.meetup.com/BrisJS/events/fxdfkryzpbgb/)
+* API Servers with NestJS - [BrisJS Meetup](https://www.meetup.com/BrisJS/events/fxdfkryzpbgb/) [[<i class='fab fa-youtube'></i> video](https://www.youtube.com/watch?v=9w3Zp3mphPQ)]
 * Zeebe Deep-dive - [Platform Engineers Meetup, Sydney](https://www.meetup.com/Sydney-PE/events/264546925/)
 * Building Scalable (and maintainable) Microservices with JavaScript - [CampJS X](https://x.campjs.org/speakers)
 * Meet a Minecrafter - Mojang [[<i class='fab fa-youtube'></i> video](https://www.youtube.com/watch?v=8xbnDMuFdQ0)]
