@@ -7,14 +7,14 @@ featured = "serverlessComputing.jpg"
 featuredalt = ""
 featuredpath = "date"
 linktitle = ""
-title = "Going to Zero-Scale Zeebe on Camunda Cloud with Cloudflare Workers"
+title = "Zero-Scale Zeebe with Cloudflare Workers"
 type = "post"
 
 +++
 
 I get questions about running Zeebe at "zero-scale". That means workers that consume no resources when there are no tasks to perform.
 
-The Zeebe service on [Camunda Cloud](https://zeebe.io/blog/2019/09/getting-started-camunda-cloud/) includes a generic HTTP-Worker that can be used to achieve this. The HTTP-Worker polls for jobs of type "Camunda-HTTP", and then invokes a REST endpoint based on the HTTP verb and URL set in the task headers. In combination with "serverless" functions, this can be used to achieve a zero-scale architecture.
+The Zeebe service on [Camunda Cloud](https://zeebe.io/blog/2019/09/getting-started-camunda-cloud/) includes a generic HTTP-Worker that can be used to achieve this. The HTTP-Worker polls for jobs of type "Camunda-HTTP", and then invokes a REST endpoint based on the HTTP verb and URL set in the task headers. If you are not on Camunda Cloud you can use [zeebe-http-worker](https://github.com/zeebe-io/zeebe-http-worker), or just write your own. In combination with "serverless" functions, this can be used to achieve a zero-scale architecture.
 
 [Cloudflare workers](https://developers.cloudflare.com/workers) are serverless processes that run in response to REST requests at the edge of Cloudflare's hosting infrastructure. "At the edge" means that a request to a Cloudflare worker is routed to the nearest point in Cloudflare's infrastructure and executed there.
 
