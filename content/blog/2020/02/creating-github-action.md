@@ -16,6 +16,8 @@ GitHub Actions are small, reusable modules of functionality that can participate
 
 The obvious things they can be used for are running tests, linting code or rebuilding artifacts on check-in, creating releases, even deploying from a particular branch.
 
+I recently wrote a [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action) that allows you to [Camunda Cloud](https://camunda.io), and it was so easy to do that I wanted to share it with you.
+
 ## GitHub Action Usage Example 
 
 If you have a repo with a `Dockerfile` in it, you can build the Docker image and publish it to Docker Hub using a GitHub Action ((see this workflow in a repo on GitHub](https://github.com/jwulf/camunda-cloud-demo-json-api)).
