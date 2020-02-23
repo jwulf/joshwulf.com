@@ -11,17 +11,19 @@ title = "Just say No to loops and variables."
 type = "post"
 +++
 
-This last couple of weeks, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (I'm pretty sure a fair whack of them were homework assignments).
+This last couple of weeks, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (_I'm pretty sure a fair whack of them were homework assignments_).
 
 One thing that came out of it - for me - was a pattern in the issues in the JavaScript programming tag (_Discord bots are hot right now with the kids_).
 
 There are certain things that people struggle with when learning to program, and when learning to program in JS.
 
-**Asynchronicity** is one. Callbacks not so much - mostly now people are struggling with Promises (with are a Monadic wrapper around an asynchronous operation), and with the subtle context impedance mismatch between async functions and non-async functions. Without TypeScript informing them of the type mismatch, they are baffled by code that is in a monadic async context interacting with code that is not. I mean: _they look the same_. At least with callbacks and Promises you have some clue in the indentation.
+**Asynchronicity** is one. Callbacks not so much - mostly now people are struggling with Promises (which are a Monadic wrapper around an asynchronous operation), and with the subtle context impedance mismatch between async functions and non-async functions. Without TypeScript informing them of the type mismatch, they are baffled by code that is in a monadic async context interacting with code that is not. I mean: _they look the same_. At least with callbacks and Promises you have some clue in the indentation.
 
 **Naming** is another one. The power of correctly naming entities in a program cannot be overestimated - I mean, it's one of the two hardest problems in computer science: caching, naming things, and whether or not to move to San Francisco. 
 
-The impact of _not_ correctly naming things cannot be overestimated either. Confusing messes of spaghetti code where the programmer had wound themselves up in a ball of yarn and not only gotten trapped inside it, but forgotten what they were trying to do in the first place. In the end, I started to have some fun with it, telling one questioner that "_80% of programming is correctly naming things, and the other 20% is choosing the font for your IDE._" [JetBrains Mono](https://www.jetbrains.com/lp/mono/). (I solved his problem for him.) He had started with an entity named `x` and was now three levels deep trying to figure out how to iterate the data structure. The Tao becomes clear when you know that for each recipe we have an array of ingredients, and each ingredient has a set of attributes that characterize it.
+The impact of _not_ correctly naming things cannot be overestimated either. Confusing messes of spaghetti code where the programmer had wound themselves up in a ball of yarn and not only gotten trapped inside it, but forgotten what they were trying to do in the first place. In the end, I started to have some fun with it, telling one questioner that "_80% of programming is correctly naming things, and the other 20% is choosing the font for your IDE._" [JetBrains Mono](https://www.jetbrains.com/lp/mono/). (I solved his problem for him.) 
+
+He had started with an entity named `x` and was now three levels deep trying to figure out how to iterate the data structure. The Tao becomes clear when you know that for each recipe we have an array of ingredients, and each ingredient has a set of attributes that characterize it.
 
 As we read in [the Analects of Confucius](https://china.usc.edu/confucius-analects-13) ("_Confucius say_"): 
 
@@ -99,7 +101,7 @@ Douglas Crockford wrote the famous book [JavaScript: The Good Parts](https://www
 
 I believe that variables belong in the category of "things to avoid".
 
-I took on programming without variables, and there has only been case where the word `let` has left my mouth in the past two years:
+I took on programming without variables, and there has only been one case where the word `let` has left my mouth in the past two years:
 
 
 ```
@@ -117,19 +119,23 @@ try {
 }
 ```
 
-This is something that I have grappled with, because it is at the intersection of another programming discipline that I adopted: striving for a single level of indentation. Memories of grappling with deeply nested code bases, trying to figure out which level got unbalanced, and ending up with code that would again lint and run, but that I wasn't sure still produced the same effects, lead me to that.
+This is something that I have grappled with, because it is at the intersection of another programming discipline that I adopted: _striving for a single level of indentation_. 
+
+Memories of grappling with deeply nested code bases, trying to figure out which level got unbalanced, and ending up with code that would again lint and run, but that I wasn't sure still produced the same effects, lead me to that.
 
 I recently resolved this, and that `let` is no more for me - but that is another blog post.
 
-I see novice programmers declaring variables as `let` and `var`, sometimes interchangably in the same code, with no reassignment of their value in the scope. Why would you do that? These declarations communicate your intent to the machine and other programmers: "_I intend that the value of this assignment change over the course of execution_". When you don't change it, why communicate that intent? You have incorrectly named a thing.
+I see novice programmers declaring variables as `let` and `var`, sometimes interchangably in the same code, with no reassignment of their value in the scope. Why would you do that? These declarations communicate your intent to the machine and other programmers: "_I intend that the value of this assignment change over the course of execution_". 
 
-And when you do mutate it, you make it necessary for the machine and more importantly, for other programmers to then trace the flow of execution through the code base to reason about its value in different places.
+When you don't change it, why communicate that intent? You have incorrectly named a thing.
 
-And when you make a coding error, and accidentally mistype a variable name (because you gave them non-descriptive, or similar names), you just created a case of mistaken identity mutation bug in the program. And no reasoner can detect your unintended mistake and warn you of it, because _variables_.
+And when you _do_ mutate it, you make it necessary for the machine and more importantly, for other programmers to then trace the flow of execution through the code base to reason about its value in different places.
+
+And when you make a coding error, and accidentally mistype a variable name (because you gave them non-descriptive, or similar names), you just created a "_case of mistaken identity mutation_" bug in the program. And no reasoner can detect your unintended mistake and warn you of it, because _variables_.
 
 Just say No to variables. Try it for one year (_I know that seems like a long time if it represents a significant percentage of your programming career to date_).
 
-If you are a new programmer struggling to get your data transformation to work, reduce the complexity - take out one of the variables: variables.
+If you are a new programmer struggling to get your data transformation to work, reduce the complexity - take out one of the variables: _variables_.
 
 ## Custom State Machines: Loops 
 
