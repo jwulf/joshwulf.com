@@ -1,6 +1,6 @@
 +++
 author = "Josh Wulf"
-categories = ["javascript", "programming"]
+categories = ["javascript", "programming", "stackoverflowed"]
 date = "2020-02-24"
 description = "A StackOverflow refactoring."
 featured = "stack-overflow.png"
@@ -10,6 +10,8 @@ linktitle = ""
 title = "Avoiding global mutable state in browser JS"
 type = "post"
 +++
+
+_This is part of [a series of posts](https://www.joshwulf.com/categories/stackoverflowed/) where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer._
 
 Global scope is a feature of browser JavaScript that is a source of bugs.
 
@@ -21,7 +23,7 @@ What we will do is reduce the bug surface area significantly.
 
 ## The Question
 
-Here is [the question from StackOverflow](https://stackoverflow.com/questions/60359864/javascript-send-out-an-alert-to-prompt-and-edit-array/60369452#60369452):
+Here is the question from StackOverflow:
 
 ```
 //global variable
@@ -101,6 +103,12 @@ const GlobalMemberStore = (() => {
 ```
 
 Note the enclosing `()` and the immediate invocation. In this case we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - `_members` - that cannot be accessed by local functions.
+
+But, but... aren't you the "[_Just Say No to Variables_](https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/)" guy? What is that `let` statement doing there.
+
+Look, we can remove variables completely. But we don't have enough information about the eventual application to do that. So what I've done here is take a global variable, and put inside a closure where _it is invisible to the rest of the application_.
+
+All the complexity and bug surface area will be behind the singularity of the closure with an immutable API.
 
 ## Implementing `getMembers`
 
@@ -386,6 +394,20 @@ const GlobalMemberStore = (() => {
 })()
 ```
 
+## Freeze!
+
+For our final touch, we are going to freeze the API object using [`Object.freeze`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze):
+
+```
+return Object.freeze(Store)
+```
+
+This prevents anyone from overwriting or modifying the API methods themselves.
+
+If you wanted, you could (deep) freeze all the return values from the API methods. That would deny local function consumers of the objects the ability to mutate the return values. They would need to use spread on them. We're not going to do that right now.
+
+Freezing objects has an impact on performance. Freezing the API is not going to make a huge difference, so the safety is worth it. The objects returned from the API are copies, so freezing them is overkill, IMHO.
+
 ## Putting it all together
 
 Here is the whole thing:
@@ -408,8 +430,8 @@ const GlobalMemberStore = (() => {
   }
 
   const Store = {
-    setMembers: members => _members = members.map(m => ({...m})),
-    getMembers: () => [..._members],
+    setMembers: members => (_members = members.map(m => ({...m}))),
+    getMembers: () => _members.map(m => ({...m})),
     getMember: id => _members.filter(m => m.id === needsArg(id))
     putMember: member => {
       const m = needsId(needsArg(member))
@@ -425,7 +447,7 @@ const GlobalMemberStore = (() => {
       }
       _members = _members.map(m => m.id === u.id? update : m)
   }
-  return Store
+  return Object.freeze(Store)
 })()
 ```
 
@@ -435,10 +457,11 @@ This may seem like way more complexity than:
 var memArray = []
 ```
 
-However, this is the _actual_ complexity involved in this data structure in the application. You will end up doing all of this anyway, but it will be spread throughout your application in manipulation and mutation of that array, and `if` statements, and fixing bugs in various places.
+However, this is the _actual_ complexity involved in this data structure in the application. _You will end up doing all of this anyway_, but it will be spread throughout your application in manipulation and mutation of that array, and `if` statements, and fixing bugs in various places.
 
 And it will be really hard to refactor in the future.
 
 With this approach, the total technical complexity of this concern is now encapsulated in one place in your application.
 
 #winning
+
