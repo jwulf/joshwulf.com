@@ -13,7 +13,7 @@ type = "post"
 
 _This is part of [a series of posts](https://www.joshwulf.com/categories/stackoverflowed/) where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer._
 
-Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it _is_ global). Global state doesn't impact the whole application - it creates a entire surface area for bugs that must be managed. Bugs related to global state can happen _anywhere_. The number of potential bugs in every function increases as soon as you have global state. 
+Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it _is_ global). Global state doesn't just impact the whole application - it creates a _entire new surface area_ for bugs _across the entire code base_, that has to be managed. Bugs related to global state can happen _anywhere_. The number of potential bugs in _every function_ increases as soon as you have global state. 
 
 Any local function can mess with the functioning of any other function by mutating global scope, and this can result in bugs that are hard to track down to their source.
 
@@ -52,7 +52,7 @@ First, it is declared as `var`, which means that it can be reassigned at runtime
 
 In fact, using `var` is a declaration to the machine and to other programmers that "_I intend that the value of this assignment change over the course of execution_".
 
-It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a var doesn't make the contents of the array mutable - you have to do deliberate work to make them immutable. Rather, declaring this as `var` makes _the assignment itself mutable_. Meaning that `memArray` can be mutated by pointing it to something other than the array you just created and assigned to it.
+It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a `var` doesn't make the contents of the array mutable - you have to do deliberate work to make them immutable. Rather, declaring this as `var` makes _the assignment itself mutable_. Meaning that `memArray` can be mutated by pointing it to something other than the array you just created and assigned to it.
 
 Somewhere deep in the code, a function could do:
 
@@ -61,6 +61,8 @@ memArray = []
 ```
 
 This could be because another programmer uses it as a local variable name with no declaration, in which case the runtime will use the previously declared global variable. You won't get a warning from your tools about using an undeclared variable, because _it is declared_.
+
+And this bug in one function somewhere, that maybe doesn't even use this global state (_it probably doesn't, or the programmer wouldn't have reused the variable name_), just broke _everything_ that does use it. And when you go to hunt it down, it is not in any of your functions that _do_ use the global state.
 
 The chances of this happening are increased because of the second issue:
 
@@ -78,15 +80,17 @@ There is no way someone is accidentally reusing that in a local scope. At the ve
 const GlobalMembersArray = []
 ```
 
-Make it a `const` so that it cannot be reassigned, and give it a meaningful and useful name. This is naming by convention that takes away cognitive load when reading the code. If I find a reference to `GlobalMembersArray` in a function deep in the code, I immediately know what I am looking at.
+Make it a `const` so that it cannot be reassigned, and give it a meaningful and useful name. This is "naming by convention" that takes away cognitive load when reading the code. 
+
+If I find a reference to `GlobalMembersArray` in a function deep in the code, I immediately know what I am looking at, and I'm not using that name for a local variable.
 
 ## Mutation 
 
-The global is now _not_ reassignable, and unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they _can_ mutate the contents.
+The global is now _not_ reassignable, _and_ unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they _can_ still mutate the contents.
 
-Presumably, we are going to want to add to, remove from, and update elements in this array.
+You want that, right? Presumably, we are going to want to add to, remove from, and update elements in this array.
 
-By exposing only the array as a global variable, we have devolved responsibility for mutating it to local functions in the application.
+_No_. By exposing just the array globally, we have _devolved responsibility_ for mutating it to local functions in the application.
 
 That concern, and hence the complexity of it, is now spread throughout the application. Bugs related to mutating the array values can appear anywhere in the application, at any time. And again, they can be hard to track down, because they will likely appear when a function uses the array and doesn't find what it expects - rather than where the bug exists.
 
