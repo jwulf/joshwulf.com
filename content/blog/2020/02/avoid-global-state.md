@@ -13,7 +13,7 @@ type = "post"
 
 _This is part of [a series of posts](https://www.joshwulf.com/categories/stackoverflowed/) where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer._
 
-Global scope is a feature of browser JavaScript that is a source of bugs.
+Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it _is_ global).
 
 Any local function can mess with the functioning of any other function by mutating global scope. This is an entire bug surface area, and can result in bugs that are hard to track down to their source.
 
