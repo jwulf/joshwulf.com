@@ -121,7 +121,7 @@ _But, but... aren't you the "[Just Say No to Variables](https://www.joshwulf.com
 
 Look, we _can_ remove variables completely. But we don't have enough information about the eventual application to do that. So what I've done here is take a global variable, and put inside a closure where _it is invisible to the rest of the application_.
 
-All the complexity and bug surface area will be behind the singularity of the closure, with an immutable API. There will be no variables exposed to the rest of the application.
+All the complexity and bug surface area will be behind the singularity of the closure, with an immutable API. There will be no variables exposed to the rest of the application. And the resulting code is [fully unit-testable](https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js).
 
 ## Implementing `getMembers`
 
