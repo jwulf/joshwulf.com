@@ -139,7 +139,7 @@ If you are a new programmer struggling to get your data transformation to work, 
 
 ## Custom State Machines: Loops 
 
-Loops are problematic in several ways.
+Loops are problematic in several ways (and this applies to `Array.forEach` as well as the classic `for` loop).
 
 Oftentimes, armed with the loop and an array of data to transform, a novice programmer will frame the problem as: "_I have to transform every element in this array_". So they make a loop, with side effects. If those side-effects are asynchronous, now they are dealing with three problems.
 
