@@ -181,7 +181,11 @@ So, we will implement an `updateMember` function. We will use `Array.map` to ret
 
 To implement the predicate function, let's describe what we want it to do in plain language:
 
-> For each member in the state, if the member id equals the id of the update, return the updated member; otherwise return the member.
+> For each member in the state,
+
+>  if the member id equals the id of the update, return the update;
+
+>  otherwise return the member.
 
 So, our predicate function looks like this:
 
@@ -214,17 +218,33 @@ The predicate function will never match, and the new state will be a new copy of
 
 We could throw an exception. This gives us the opportunity to figure out where the bug in the application is that it is trying to update a member that doesn't exist. This is a good idea.
 
-We could also rename the `updateMember` operation to `upsertMember` and insert or update (or create a new API for it). We would lose some safety and introduce a surface area for bugs with this, because a mis-behaving update function could create new members, or a member creation call with a duplicate `id` would update the existing member instead. So we are not going to do that.
-
-Instead, let's throw an exception so that the root cause can be debugged in the local function. To do this, we will need a `getMember` function that we can use. So, let's implement that.
+Let's throw an exception so that the root cause can be debugged in the local function. To do this, we will need a `getMember` function that we can use. So, let's implement that.
 
 ## Implementing `getMember`
 
-It's likely that local functions will want only a single member. If we don't implement it here, we will have local functions retrieving the entire state and filtering it. This leaks complexity into the application, because we can do that in one place and one place only in the application: here.
+It's likely that local functions will want only a single member. If we don't implement it here, we will have local functions retrieving the entire state and filtering it. This leaks complexity into the application, because we _can_ do that in "one place, and one place only" in the application: _here_.
 
 Then we only have to test it in one place, and we only ever have to get it to work in one place. That reduces the surface area for bugs in the application.
 
-We can use [`Array.filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) to find elements in an array:
+We can use [`Array.filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) to find elements in an array. `Array.filter` returns a new array containing only the elements from the original array for whom the predicate function returned true.
+
+The predicate function is straight forward:
+
+> Return true if the `member.id` equals the requested `id`;
+
+> otherwise, return false
+
+Reducing that down, we get:
+
+> Return `member.id` equals requested `id`
+
+or:
+
+```
+m => m.id === id
+```
+
+So,
 
 ```
 const GlobalMemberStore = (() => {
@@ -291,7 +311,7 @@ const GlobalMemberStore = (() => {
 })()
 ```
 
-Now we have a private to our own API, as `Store`. So we can use it to see if the member the local function wants to update, actually exists, and if not, throw.
+Now we have a private reference to our own API, as `Store`. So we can use it to see if the member that the local function wants to update, actually exists - and if not, throw.
 
 ```
 const GlobalMemberStore = (() => {
@@ -346,7 +366,7 @@ const GlobalMemberStore = (() => {
 
 Another potential bug that we can detect here is a local function passing in either `undefined` or a member with an `id` that is undefined. 
 
-We can write a helper function for this, and call it on all operations where it is a problem:
+We can write helper functions for this, and call them on all operations where it is a requirement:
 
 ```
 const GlobalMemberStore = (() => {
@@ -371,18 +391,6 @@ Here is how we use this:
 ```
 const GlobalMemberStore = (() => {
   let _members = []
-  const needsArg = arg => {
-    if (!member) {
-      throw new Error (`Undefined passed as argument to Store!`)
-    }
-    return arg
-  }
-  const needsId = member => {
-    if (!member.id) {
-      throw new Error (`Undefined id on member passed as argument to Store!`)
-    }
-    return member
-  }
   const Store = {
     putMember: member => {
       const m = needsId(needsArg(member))
@@ -475,6 +483,6 @@ This approach to state management has become popular in JS in recent years, and 
 * [Redux](https://redux.js.org/introduction/getting-started/)
 * [Flux](https://www.freecodecamp.org/news/an-introduction-to-the-flux-architectural-pattern-674ea74775c9/)
 * [Immutable.JS](https://www.npmjs.com/package/immutable)
-* (_My personal favorite_) [Nanoflux](https://github.com/ohager/nanoflux)
+* [Nanoflux](https://github.com/ohager/nanoflux) (_My personal favorite_) 
 
 If you grasped the concepts and rational for the refactorings that I made in this example, you will be well-placed to understand these mature, more sophisticated (and generalised) implementations.
