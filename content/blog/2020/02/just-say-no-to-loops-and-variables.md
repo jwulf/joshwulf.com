@@ -11,7 +11,7 @@ title = "Just say No to loops and variables."
 type = "post"
 +++
 
-This last couple of weeks, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (_I'm pretty sure a fair whack of them were homework assignments_).
+Recently, I spent some time on StackOverflow, helping people with their school assignments - I mean, serious programming questions they had at work. (_I'm pretty sure a fair whack of them were homework assignments_).
 
 One thing that came out of it - for me - was a pattern in the issues in the JavaScript programming tag (_Discord bots are hot right now with the kids_).
 

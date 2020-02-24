@@ -73,23 +73,23 @@ There is no way someone is accidentally reusing that in a local scope. At the ve
 const GlobalMembersArray = []
 ```
 
-Make it a `const` so that it cannot be reassigned, and give it a meaningful and useful name. This is convention that takes away cognitive load when reading the code. If I find a reference to `GlobalMembersArray` in a function deep in the code, I immediately know what I am looking at.
+Make it a `const` so that it cannot be reassigned, and give it a meaningful and useful name. This is naming by convention that takes away cognitive load when reading the code. If I find a reference to `GlobalMembersArray` in a function deep in the code, I immediately know what I am looking at.
 
 ## Mutation 
 
-The global is now not reassignable, and unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they _can_ mess with the contents.
+The global is now _not_ reassignable, and unambiguously named, which reduces the chances of someone accidentally reusing it. Since it is an array, they cannot change the reference to point to another array, object, or primitive, but they _can_ mutate the contents.
 
 Presumably, we are going to want to add to, remove from, and update elements in this array.
 
 By exposing only the array as a global variable, we have devolved responsibility for mutating it to local functions in the application.
 
-That concern, and hence the complexity of it, is now spread through-out the application. Bugs related to mutating the array can appear anywhere in the application, at any time. And again, they can be hard to track down, because they will likely appear when a function uses the array and doesn't find what it expects - rather than where the bug exists.
+That concern, and hence the complexity of it, is now spread throughout the application. Bugs related to mutating the array values can appear anywhere in the application, at any time. And again, they can be hard to track down, because they will likely appear when a function uses the array and doesn't find what it expects - rather than where the bug exists.
 
 ## Second Refactor - IIFE
 
 Rather than expose an array, we should expose an object that encapsulates the state, _plus_ mutation methods. And we will not expose the actual state, because local functions can still and may be tempted to mutate it directly. Instead we will return _a copy of the state_, so that the only way to update it is via the object methods.
 
-We can do this using an IIFE - an [Immediately Invoked Function Expression](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression), a JavaScript function that immediately executes can return an object that has a private scope inside a closure.
+We can do this using an IIFE - an [Immediately Invoked Function Expression](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression), a JavaScript function that immediately executes and can return an object that has a private scope inside a closure.
 
 In terms of ES6 classes, it is roughly analogous to creating an instance of a class that has private methods.
 
@@ -104,11 +104,11 @@ const GlobalMemberStore = (() => {
 
 Note the enclosing `()` and the immediate invocation. In this case we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - `_members` - that cannot be accessed by local functions.
 
-But, but... aren't you the "[_Just Say No to Variables_](https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/)" guy? What is that `let` statement doing there.
+_But, but... aren't you the "[Just Say No to Variables](https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/)" guy? What is that `let` statement doing there?!_
 
-Look, we can remove variables completely. But we don't have enough information about the eventual application to do that. So what I've done here is take a global variable, and put inside a closure where _it is invisible to the rest of the application_.
+Look, we _can_ remove variables completely. But we don't have enough information about the eventual application to do that. So what I've done here is take a global variable, and put inside a closure where _it is invisible to the rest of the application_.
 
-All the complexity and bug surface area will be behind the singularity of the closure with an immutable API.
+All the complexity and bug surface area will be behind the singularity of the closure, with an immutable API. There will be no variables exposed to the rest of the application.
 
 ## Implementing `getMembers`
 
@@ -127,7 +127,7 @@ The [ES6 spread syntax](https://javascript.info/rest-parameters-spread#spread-sy
 
 Local functions can add things to the array, or delete elements, but these operations do not affect the global state, because they have _a copy_ of the global state, not a reference to the global state. 
 
-Note that because the elements of the array are objects, they can still mutate members within the copy, and that _will_ affect the global state, because they are references to objects. 
+Note, however, that because the elements of the array are _objects_, local functions can still mutate members within the copy, and that _will_ affect the global state - because they are references to objects. 
 
 We can avoid that scenario like this:
 
@@ -140,11 +140,11 @@ const GlobalMemberStore = (() => {
 })()
 ```
 
-The [`Array.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function returns a new array, so the consumer has no reference to the global state array.
+[`Array.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) returns a new array, so the consumer has no reference to the global state array.
 
-In the map [predicate function](https://en.wikipedia.org/wiki/Functional_predicate) - `m => ({...m})` - we return a _copy_ of the member object from the `_members` array, again using the ES6 Spread syntax, this time on an object.
+In the map [predicate function](https://en.wikipedia.org/wiki/Functional_predicate) - `m => ({...m})` - we return a _copy_ of each member object from the `_members` array, again using the ES6 Spread syntax, this time on an object.
 
-Now local functions have access to the global members state, but it is immutable. They cannot update the global state from the copy that they get. For that, they will need to call an update method.
+Now, local functions have access to the global members state, but it is immutable. They cannot update the global state from the copy that they get. For that, they will need to call an update method.
 
 ## Implementing `setMembers`
 
@@ -177,7 +177,9 @@ Then the local function calling this method would have a local reference to the 
 
 It is likely that a business requirement for this application is that you can update a member. 
 
-So, we will implement an `updateMember` function. We will use `Array.map` to return a new array. To implement the predicate function, let's describe what we want it to do in plain language:
+So, we will implement an `updateMember` function. We will use `Array.map` to return a new array. A naive approach to this might be "_let's iterate over the array using `forEach` and mutate the element we are updating_". See the post "[Just Say No to Loops and Variables](https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/)" for an in-depth explanation of why you _don't_ want to do that.
+
+To implement the predicate function, let's describe what we want it to do in plain language:
 
 > For each member in the state, if the member id equals the id of the update, return the updated member; otherwise return the member.
 
@@ -465,3 +467,14 @@ With this approach, the total technical complexity of this concern is now encaps
 
 #winning
 
+## Further Resources
+
+This approach to state management has become popular in JS in recent years, and is the basis of the approach used by:
+
+* [React `setState`](https://reactjs.org/docs/state-and-lifecycle.html)
+* [Redux](https://redux.js.org/introduction/getting-started/)
+* [Flux](https://www.freecodecamp.org/news/an-introduction-to-the-flux-architectural-pattern-674ea74775c9/)
+* [Immutable.JS](https://www.npmjs.com/package/immutable)
+* (_My personal favorite_) [Nanoflux](https://github.com/ohager/nanoflux)
+
+If you grasped the concepts and rational for the refactorings that I made in this example, you will be well-placed to understand these mature, more sophisticated (and generalised) implementations.
