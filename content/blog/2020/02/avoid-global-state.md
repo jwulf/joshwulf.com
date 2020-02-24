@@ -52,7 +52,7 @@ First, it is declared as `var`, which means that it can be reassigned at runtime
 
 In fact, using `var` is a declaration to the machine and to other programmers that "_I intend that the value of this assignment change over the course of execution_".
 
-It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a `var` doesn't make the contents of the array mutable - you have to do deliberate work to make them immutable. Rather, declaring this as `var` makes _the assignment itself mutable_. Meaning that `memArray` can be mutated by pointing it to something other than the array you just created and assigned to it.
+It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a `var` doesn't make the _contents_ of the array mutable - you have to do real deliberate work to make them immutable. Rather, declaring this as `var` makes _the assignment itself mutable_. Meaning that `memArray` itself can be mutated by pointing it to something other than the array you just created and assigned to it.
 
 Somewhere deep in the code, a function could do:
 
@@ -111,7 +111,9 @@ const GlobalMemberStore = (() => {
 })()
 ```
 
-Note the enclosing `()` and the immediate invocation. In this case we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - `_members` - that cannot be accessed by local functions.
+Note the enclosing `()` and the immediate invocation: `(() => {})()`.
+
+In this case, we will get back an Object with no properties. But what you want to know is that it also contains a hidden array - `_members` - that cannot be accessed by local functions.
 
 _But, but... aren't you the "[Just Say No to Variables](https://www.joshwulf.com/blog/2020/02/just-say-no-to-loops-and-variables/)" guy? What is that `let` statement doing there?!_
 
@@ -136,7 +138,7 @@ The [ES6 spread syntax](https://javascript.info/rest-parameters-spread#spread-sy
 
 Local functions can add things to the array, or delete elements, but these operations do not affect the global state, because they have _a copy_ of the global state, not a reference to the global state. 
 
-Note, however, that because the elements of the array are _objects_, local functions can still mutate members within the copy, and that _will_ affect the global state - because they are references to objects. 
+Note, however, that because the elements of the array are _objects_, local functions can still mutate members within the copy, and that _will_ affect the global state - because the array elements are references to objects. The internal state array and the copy we just returned are _different_ arrays, but they contain references to the _same_ `member` objects
 
 We can avoid that scenario like this:
 
@@ -149,11 +151,17 @@ const GlobalMemberStore = (() => {
 })()
 ```
 
-[`Array.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) returns a new array, so the consumer has no reference to the global state array.
+[`Array.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) returns a new array, so the consumer has no reference to the global state array. The new array is populated by applying the [_predicate function_](https://en.wikipedia.org/wiki/Functional_predicate) to each value in the original array, and putting the return value in the new array. 
 
-In the map [predicate function](https://en.wikipedia.org/wiki/Functional_predicate) - `m => ({...m})` - we return a _copy_ of each member object from the `_members` array, again using the ES6 Spread syntax, this time on an object.
+It is "make a new array by applying this transform to each element in this other array".
 
-Now, local functions have access to the global members state, but it is immutable. They cannot update the global state from the copy that they get. For that, they will need to call an update method.
+In the predicate function - `m => ({...m})` - we return a _copy_ of each member object from the `_members` array, again using the ES6 Spread syntax, this time on an object.
+
+When you return an object in a one-liner arrow function, you need to put `()` around it so the interpreter doesn't interpret the contents of `{}` as function code, but knows that it is an object, so: `m => ({...m})`.
+
+Now we have a new array, and new objects in the array.
+
+Local functions now have access to the _value_ of the global members state, but the actual global state is immutable by them, because they have no reference to it. They cannot update the global state from the copy that they get. For that, they will need to call an update method.
 
 ## Implementing `setMembers`
 
@@ -476,7 +484,7 @@ This may seem like way more complexity than:
 var memArray = []
 ```
 
-However, this is the _actual_ complexity involved in this data structure in the application. _You will end up doing all of this anyway_, but it will be spread throughout your application in manipulation and mutation of that array, and `if` statements, and fixing bugs in various places.
+However, this is the _actual_ complexity involved in this data structure in the application. _You will end up doing all of this anyway_ - but it will be spread throughout your application in manipulation and mutation of that array, and `if` statements, and fixing bugs in various places.
 
 And it will be really hard to refactor in the future.
 
