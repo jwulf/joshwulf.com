@@ -459,7 +459,7 @@ const GlobalMemberStore = (() => {
   const Store = {
     setMembers: members => (_members = members.map(m => ({...m}))),
     getMembers: () => _members.map(m => ({...m})),
-    getMember: id => _members.filter(m => m.id === needsArg(id))
+    getMember: id => _members.filter(m => m.id === needsArg(id)),
     putMember: member => {
       const m = needsId(needsArg(member))
       if (Store.getMember(m.id).found) {
@@ -473,6 +473,7 @@ const GlobalMemberStore = (() => {
         throw new Error(`${m.id} does not exists!`)
       }
       _members = _members.map(m => m.id === u.id? update : m)
+    }
   }
   return Object.freeze(Store)
 })()
