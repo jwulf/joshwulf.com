@@ -274,7 +274,7 @@ const GlobalMemberStore = (() => {
 
 The `getMember` array will now return an array with either zero (if no member with that id exists in the state) or one... hang on, what happens if there is more than one member in the array with the same `id`? In that case it will return more than one member.
 
-Probably, the business requirement is that member `id` is unique. So we will take that into account when we write the `addMember` function.
+Probably, the business requirement is that member `id` is unique. So we will take that into account when we write the `addMember` function. 
 
 So it will return an array with 0 or 1 members in it. Probably local functions want a member or `undefined`.
 
@@ -304,16 +304,20 @@ const GlobalMemberStore = (() => {
     getMember: id => {
       const member = _members.filter(m => m.id === id)
       return member.length === 1 ? 
-        { found: true, member: member[0]} :
+        { found: true, member: {...member[0]}} :
         { found: false, member: undefined }
     }
   }
 })()
 ```
 
+Remember to Spread the member to return a copy (I picked this up when the test case failed here).
+
 Nice API.
 
 ## Throwing on impossible update
+
+Another significant advantage of this approach is that we put all our business validation rules about the data in a single place: in the store. They are not spread throughout the application, and the responsibility of everyone and no-one. They can be put in one place, tested automatically, updated in one place, and if a local function violates them, we will find out immediately when it tries to store the data, through an exception.
 
 We can now consume `getMember` from our own API to guard against an update error. 
 
@@ -459,7 +463,12 @@ const GlobalMemberStore = (() => {
   const Store = {
     setMembers: members => (_members = members.map(m => ({...m}))),
     getMembers: () => _members.map(m => ({...m})),
-    getMember: id => _members.filter(m => m.id === needsArg(id)),
+    getMember: id => {
+      const member = _members.filter(m => m.id === id)
+      return member.length === 1 ? 
+        { found: true, member: {...member[0]}} :
+        { found: false, member: undefined }
+    },
     putMember: member => {
       const m = needsId(needsArg(member))
       if (Store.getMember(m.id).found) {
@@ -469,8 +478,8 @@ const GlobalMemberStore = (() => {
     },
     updateMember: update => {
       const u = needsId(needsArg(update))
-      if (!Store.getMember(m.id).found) {
-        throw new Error(`${m.id} does not exists!`)
+      if (!Store.getMember(u.id).found) {
+        throw new Error(`${u.id} does not exists!`)
       }
       _members = _members.map(m => m.id === u.id? update : m)
     }
