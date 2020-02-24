@@ -19,11 +19,11 @@ Any local function can mess with the functioning of any other function by mutati
 
 In this refactoring we are not going to be able to completely eliminate global state - mostly because we don't have enough information about how the state will be used in the rest of the application to make a recommendation for an alternative. 
 
-What we will do is reduce the bug surface area significantly.
+What we will do is reduce the bug surface area significantly. And along the way, you'll be introduced to some of the concepts underlying `React.setState` and Redux.
 
 ## The Question
 
-Here is the question from StackOverflow:
+Here is the code from StackOverflow:
 
 ```
 //global variable
@@ -37,7 +37,6 @@ function member(id, password){
   var memObj1=new member("m001","123");
   memArray.push(memObj1);
 ```
-> How do I send out an alert to prompt and edit each object that is push to memArray?
 
 ## Discussion
 
@@ -49,13 +48,19 @@ The global `memArray` has two immediate issues - apart from being global.
 
 * `var`
 
-First, it is declared as `var`, which means that it can be reassigned at runtime. Somewhere deep in the code, a function could do:
+First, it is declared as `var`, which means that it can be reassigned at runtime. 
+
+In fact, using `var` is a declaration to the machine and to other programmers that "_I intend that the value of this assignment change over the course of execution_".
+
+It may be that the novice programmer misunderstands assignment of arrays in JS. Making this a var doesn't make the contents of the array mutable - you have to do deliberate work to make them immutable. Rather, declaring this as `var` makes _the assignment itself mutable_. Meaning that `memArray` can be mutated by pointing it to something other than the array you just created and assigned to it.
+
+Somewhere deep in the code, a function could do:
 
 ```
 memArray = []
 ```
 
-This could be because another programmer uses it as a local variable name with no declaration, in which case the runtime will use the previously declared global variable. You won't get a warning from your tools about using an undeclared variable, because _it is declared_. 
+This could be because another programmer uses it as a local variable name with no declaration, in which case the runtime will use the previously declared global variable. You won't get a warning from your tools about using an undeclared variable, because _it is declared_.
 
 The chances of this happening are increased because of the second issue:
 
