@@ -1,0 +1,113 @@
+
+
+## First Solution
+
+_The first solution solves the questioner's immediate problem, and introduced them to `JSON.parse`._
+
+If you want to customize it try to use your own modals instead of `window.prompt` and just display values with editable text fields, on submit capture those values and change them in array respectively.
+
+```
+var memArray = [];
+
+//object    
+function member(id, password) {
+  this.id = id;
+  this.pwd = password
+}
+
+var memObj1 = new member("m001", "123");
+var memObj2 = new member("m002", "123");
+var memObj3 = new member("m031", "123");
+memArray.push(memObj1);
+memArray.push(memObj2);
+memArray.push(memObj3);
+memArray.forEach((val, ind) => {
+  memArray[ind] = JSON.parse(window.prompt("want to edit values?", JSON.stringify(memArray[ind])));
+});
+
+console.log(memArray)
+```
+
+
+## Refactoring
+
+Pavan's answer is good, but to make this testable in automated tests:
+
+```
+// I would name these fields in your API 
+// by making the constructor take an object.
+// Capitalise the name to signal that it can be newed    
+function Member({id, password}) {
+  this.id = id;
+  this.pwd = password
+}
+
+// Name the array for what it is
+const members = [ 
+  new Member({id: "m001", password: "123"}),
+  new Member({id: "m002", password: "123"}),
+  new Member({id: "m031", password: "123"})
+]
+
+const editInBrowserFn = member => JSON.parse(window.prompt("want to edit values?", JSON.stringify(member)));
+
+const updateMembers = editFn => array => array.map(editFn)
+
+// To get an update
+const updatedMembers = updateMembers(editInBrowserFn)(members)
+
+console.log(updatedMembers)
+
+// You can now test it by making an testing editFn that doesn't need user interaction
+
+const testEditFn = m => new Member({id: m.id, password: 'test'})
+
+const testMembers = updateMembers(testEditFn)(members)
+console.log(testMembers)
+```
+
+To do it this way, you will need to take it out of the global scope. That is a good discipline to develop. As a first step you could make an object in global scope that holds the latest member list:
+
+```
+const Members = (() => {
+   let members = []
+   return {
+      setMembers: this.members = [...members],
+      getMembers: () => [...members]
+   }
+})()
+```
+
+Now the way to update the members is like this:
+
+```
+const updateFn = updateMembers(editInBrowser)
+
+function updatePasswords() {
+   const members = Members.getMembers()
+   Members.setMembers(updateFn(members))
+}
+```
+
+Nothing can accidentally delete or mutate the members array now, so that bug surface area is eliminated.
+
+This is how React setState is designed. It's inspired by functional programming ideas and immutability.
+
+You probably want to be able to update just one member, so:
+
+```
+const Members = (() => {
+   let members = []
+   return {
+      setMembers: this.members = [...members],
+      getMembers: () => [...members],
+      updateMember: updated => 
+         this.members = this.members.map(m =>
+            m.id === updated.id ? updated : m)
+   }
+})()
+```
+
+Now all your array mutation is in one single place, and you only have to make it bug-free there. Otherwise, your global state is exposed and you have to fix bugs everywhere related to it. Without this, all your calling functions are responsibly for correctly managing the global state of the application. Complex.
+
+Crystallise the complexity in one place.
