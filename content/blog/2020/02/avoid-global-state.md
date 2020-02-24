@@ -13,6 +13,8 @@ type = "post"
 
 _This is part of [a series of posts](https://www.joshwulf.com/categories/stackoverflowed/) where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer._
 
+_The accompanying GitHub repo for this article can be found [here](https://github.com/jwulf/immutable-global-store)._
+
 Global scope is a feature of browser JavaScript that is a source of application-spanning bugs (it _is_ global). Global state doesn't just impact the whole application - it creates a _entire new surface area_ for bugs _across the entire code base_, that has to be managed. Bugs related to global state can happen _anywhere_. The number of potential bugs in _every function_ increases as soon as you have global state. 
 
 Any local function can mess with the functioning of any other function by mutating global scope, and this can result in bugs that are hard to track down to their source.
@@ -311,7 +313,7 @@ const GlobalMemberStore = (() => {
 })()
 ```
 
-Remember to Spread the member to return a copy (I picked this up when the test case failed here).
+Remember to Spread the member to return a copy (I picked this up when the test case failed [here](https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js#L109)).
 
 Nice API.
 
@@ -498,7 +500,9 @@ However, this is the _actual_ complexity involved in this data structure in the 
 
 And it will be really hard to refactor in the future.
 
-With this approach, the total technical complexity of this concern is now encapsulated in one place in your application.
+With this approach, the total technical complexity of this concern is now encapsulated in one place in your application. It is testable through automated tests - [as demonstrated in the accompanying repo](https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js). There are 125 lines of test code for 40 lines of code. So 165 lines of code to replace `var memArray = []`.
+
+However, business validation of the data now has a place to live, and the entire expected usage of this array is now implemented such that local functions cannot introduce bugs related to it - only their local use of it.
 
 #winning
 
