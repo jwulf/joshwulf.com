@@ -27,18 +27,7 @@ What we will do is reduce the bug surface area significantly. And along the way,
 
 Here is the code from StackOverflow:
 
-```
-//global variable
-var memArray  =[];
-
-//object    
-function member(id, password){
-  this.id          = id; 
-  this.pwd         = password
-  }
-  var memObj1=new member("m001","123");
-  memArray.push(memObj1);
-```
+{{< gist jwulf c3b59f4915d4f644ea1a2c4ea0b26bed >}}
 
 ## Discussion
 
@@ -106,12 +95,7 @@ In terms of ES6 classes, it is roughly analogous to creating an instance of a cl
 
 Here it is with no accessors:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  return {}
-})()
-```
+{{< gist jwulf e018ef5088172b7f150703dcb411fd47 >}}
 
 Note the enclosing `()` and the immediate invocation: `(() => {})()`.
 
@@ -127,14 +111,7 @@ All the complexity and bug surface area will be behind the singularity of the cl
 
 Now we will provide a method to return _a copy_ of the `_members` array:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  return {
-    getMembers: () => [..._members]
-  }
-})()
-```
+{{< gist jwulf fd13d5d43c2edccc9766c0384c6476a6 >}}
 
 The [ES6 spread syntax](https://javascript.info/rest-parameters-spread#spread-syntax) - `[...members]` - _spreads_ the contents of the local members array into a new array, and returns that. 
 
@@ -144,14 +121,7 @@ Note, however, that because the elements of the array are _objects_, local funct
 
 We can avoid that scenario like this:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  return {
-    getMembers: () => _members.map(m => ({...m}))
-  }
-})()
-```
+{{< gist jwulf 532ea53b2e317ee72d28ba1ba598a40b >}}
 
 [`Array.map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) returns a new array, so the consumer has no reference to the global state array. The new array is populated by applying the [_predicate function_](https://en.wikipedia.org/wiki/Functional_predicate) to each value in the original array, and putting the return value in the new array. 
 
@@ -171,14 +141,7 @@ The first method we will implement is a hydration method that allows a local fun
 
 I'll take out `getMembers` for now to make it easier to read:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  return {
-    setMembers: members => _members = members.map(m => ({...m}))
-  }
-})()
-```
+{{< gist jwulf eff4b5ae21437b66bc0e1cb4a76da1e5 >}}
 
 Here we use the Spread syntax to copy the members to a new array, and this becomes the global members. 
 
@@ -216,14 +179,7 @@ We are using the [ternary operator](https://developer.mozilla.org/en-US/docs/Web
 
 We can probably shorten the name we use for `member` to `m`, because the context is sufficient to provide information about what it is:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  return {
-    updateMember: update => (_members = _members.map(m => m.id === update.id? update : m))
-  }
-})()
-```
+{{< gist jwulf bb7572767d92c80257a32116feed39eb >}}
 
 We enclose the assignment operation `_members = ` in parens `()` to indicate that we did not forget to return a value, and intended only the side-effect. We could have put it in `{}`, but that will cause code formatters to turn our single line into three.
 
@@ -265,14 +221,7 @@ m => m.id === id
 
 So,
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  return {
-    getMember: id => _members.filter(m => m.id === id)
-  }
-})()
-```
+{{< gist jwulf 0d6712191a4e53b7ca067a846ba87a2c >}}
 
 The `getMember` array will now return an array with either zero (if no member with that id exists in the state) or one... hang on, what happens if there is more than one member in the array with the same `id`? In that case it will return more than one member.
 
@@ -299,19 +248,7 @@ This reduces bugs. Otherwise, we are relying on every local function in the appl
 
 So: 
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  return {
-    getMember: id => {
-      const member = _members.filter(m => m.id === id)
-      return member.length === 1 ? 
-        { found: true, member: {...member[0]}} :
-        { found: false, member: undefined }
-    }
-  }
-})()
-```
+{{< gist jwulf 57634fe589b39b06f6a9f5c90373566f >}}
 
 Remember to Spread the member to return a copy (I picked this up when the test case failed [here](https://github.com/jwulf/immutable-global-store/blob/master/test.spec.js#L109)).
 
@@ -325,32 +262,11 @@ We can now consume `getMember` from our own API to guard against an update error
 
 How can we do that? We need to lift our API to its own context inside the closure, like this:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  const Store = {
-  }
-  return Store
-})()
-```
+{{< gist jwulf 8f981b5bf15a27411113c30d98a1cd04 >}}
 
 Now we have a private reference to our own API, as `Store`. So we can use it to see if the member that the local function wants to update, actually exists - and if not, throw.
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  const Store = {
-    updateMember: update => {
-      const member = Store.getMember(update.id)
-      if (!member.found) {
-        throw new Error(`No member with id ${update.id} in the store!`)
-      }
-      _members = _members.map(m => m.id === update.id? update : m)
-    }
-  }
-  return Store
-})()
-```
+{{< gist jwulf 1a38076de9ce19bd5e72f0b809e7c66d >}}
 
 ## Implementing `putMember`
 
@@ -362,28 +278,7 @@ That's probably a bug somewhere further upstream in the application logic, so we
 
 So we can do this:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  const Store = {
-    putMember: member => {
-      if (Store.getMember(member.id).found) {
-        throw new Error(`${member.id} already exists!`)
-      }
-      _members = [..._members, {...member}]
-    },
-    updateMember: update => {
-      const u = needsMember(needsArg(u))
-      const member = Store.getMember(u.id)
-      if (!member.found) {
-        throw new Error(`No member with id ${u.id} in the store!`)
-      }
-      _members = _members.map(m => m.id === u.id? update : m)
-    }
-  }
-  return Store
-})()
-```
+{{< gist jwulf 430210f61fafa828342a0f61e808e14f >}}
 
 ## Dealing with a undefined id
 
@@ -391,41 +286,11 @@ Another potential bug that we can detect here is a local function passing in eit
 
 We can write helper functions for this, and call them on all operations where it is a requirement:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  const needsArg = arg => {
-    if (!member) {
-      throw new Error (`Undefined passed as argument to Store!`)
-    }
-    return arg
-  }
-  const needsId = member => {
-    if (!member.id) {
-      throw new Error (`Undefined id on member passed as argument to Store!`)
-    }
-    return member
-  }
-})()
-```
+{{ gist jwulf a0664d542037c385b81e8495811c537d }}
 
 Here is how we use this:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-  const Store = {
-    putMember: member => {
-      const m = needsId(needsArg(member))
-      if (Store.getMember(m.id).found) {
-        throw new Error(`${m.id} already exists!`)
-      }
-      _members = [..._members, {...m}]
-    }
-  }
-  return Store
-})()
-```
+{{< gist jwulf 4f27e96edf4a2e825d0cdf05352be7c2 >}}
 
 ## Freeze!
 
@@ -445,50 +310,7 @@ Freezing objects has an impact on performance. Freezing the API is not going to 
 
 Here is the whole thing:
 
-```
-const GlobalMemberStore = (() => {
-  let _members = []
-
-  const needsArg = arg => {
-    if (!arg) {
-      throw new Error (`Undefined passed as argument to Store!`)
-    }
-    return arg
-  }
-  const needsId = member => {
-    if (!member.id) {
-      throw new Error (`Undefined id on member passed as argument to Store!`)
-    }
-    return member
-  }
-
-  const Store = {
-    setMembers: members => (_members = members.map(m => ({...m}))),
-    getMembers: () => _members.map(m => ({...m})),
-    getMember: id => {
-      const member = _members.filter(m => m.id === id)
-      return member.length === 1 ? 
-        { found: true, member: {...member[0]}} :
-        { found: false, member: undefined }
-    },
-    putMember: member => {
-      const m = needsId(needsArg(member))
-      if (Store.getMember(m.id).found) {
-        throw new Error(`${m.id} already exists!`)
-      }
-      _members = [..._members, {...m}]
-    },
-    updateMember: update => {
-      const u = needsId(needsArg(update))
-      if (!Store.getMember(u.id).found) {
-        throw new Error(`${u.id} does not exists!`)
-      }
-      _members = _members.map(m => m.id === u.id? update : m)
-    }
-  }
-  return Object.freeze(Store)
-})()
-```
+{{< gist jwulf c97e95c6bec88a049332dd42092b29bc >}}
 
 This may seem like way more complexity than: 
 
@@ -517,3 +339,5 @@ This approach to state management has become popular in JS in recent years, and 
 * [Nanoflux](https://github.com/ohager/nanoflux) (_My personal favorite_) 
 
 If you grasped the concepts and rational for the refactorings that I made in this example, you will be well-placed to understand these mature, more sophisticated (and generalised) implementations.
+
+**About me**: _I’m a Developer Advocate at [Camunda](https://camunda.com), working primarily on the [Zeebe Workflow engine for Microservices Orchestration](https://zeebe.io), and the maintainer of the [Zeebe Node.js client. In my spare time, I build [Magikcraft](https://github.com/Magikcraft), a platform for programming with JavaScript in Minecraft._
