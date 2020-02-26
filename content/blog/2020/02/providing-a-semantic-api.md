@@ -158,7 +158,7 @@ Honestly though, writing that much JSDoc is a pain. One of the issues with it is
 
 Especially when you are prototyping, you don't want to add that much overhead. But you would like the safety and IDE assist that you get from it. 
 
-In that case, you want TypeScript. The IDE autocompletion and type-safety is directly tied to the inline declaration of types, and not to a decoupled description that you have to write.
+In that case, you want [TypeScript](https://www.typescriptlang.org/). The IDE autocompletion and type-safety is directly tied to the inline declaration of types, and not to a decoupled description that you have to write.
 
 Unless you are firmly wedded to using plain JS, TypeScript is a better solution. With automatic type definition generation, you can provide code that JS programmers can consume with typings that their IDE can use.
 
