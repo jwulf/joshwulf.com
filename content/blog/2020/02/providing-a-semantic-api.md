@@ -132,7 +132,7 @@ Well, in the JSDoc comment, we have to name the object in order to be able to na
 
 While we are at it, we can annotate the function to communicate to both the machine (IDE linting) and humans that the function _must_ be newed. This takes our naming by convention to another level, because good IDEs will be able to a consuming programmer that they forgot to `new` our function, if they forget.
 
-To do that, we use the [JSDoc `@classdesc` annotation](https://jsdoc.app/tags-classdesc.html).
+To do that, we use the [JSDoc `@constructs` annotation](https://jsdoc.app/tags-constructs.html).
 
 Finally, we can also supply information about the new object that gets returned. This provides consumers with information not only about the API surface of our function, but information about the object they create with it.
 
