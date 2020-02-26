@@ -42,9 +42,9 @@ let b = "World"
 
 You are communicating to the world - by which I mean machine reasoners (like ESLint, your IDE's language service, and the JS run-time itself) and other programmers:
 
-> I intend the the value of this assignment change over the course of execution. Do not rely on the eventual value of this assignment.
+> I intend that the value of this assignment change over the course of execution. Do not rely on the eventual value of this assignment.
 
-What this means for other programmers is that if they encounter this reference later in the code base, they have to go back through all the intervening code and mentally execute it to reason about its value at that point in the code.
+What this means for other programmers is that when they encounter this reference later in the code base, they have to go back through all the intervening code, and mentally execute it to reason about its value at that point in the code.
 
 This is a source of complexity in comprehending and working with a code base.
 
@@ -56,7 +56,7 @@ For runtimes, a `const` declaration can be replaced with its value inline. To do
 
 I see programmers declaring assignments using `var` and `let` where the assignment does not change during the lifetime of the reference.
 
-In this case, it is quite simple: the declaration is misnamed. The programmer has miscommunicated their intent. They **do not** intend the reference value of the assignment to change over the course of execution. In this case, the term that matches their intent is `const`.
+In this case, it is quite simple: the declaration is misstated. The programmer has miscommunicated their intent. They **do not** intend the reference value of the assignment to change over the course of execution. In this case, the term that matches their intent is `const`.
 
 **Recommendation**: For all simple values that do not change (like a URL string), use `const`.
 
