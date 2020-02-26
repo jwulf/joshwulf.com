@@ -17,7 +17,7 @@ A _Semantic API_ is "an interface that provides information about usage of the i
 
 The meaning of "_semantics_", according to the Oxford Dictionary:
 
-> The branch of linguistics and logic concerned with meaning. There are a number of branches and subbranches of semantics, including formal semantics, which studies the logical aspects of meaning, such as sense, reference, implication, and logical form, lexical semantics, which studies word meanings and word relations, and conceptual semantics, which studies the cognitive structure of meaning.
+> The branch of linguistics and logic concerned with meaning. 
 
 Computer programming is an exercise in applied linguistics. It is precisely specifying the execution of operations to transform matter through the utterance of magic spells.
 
