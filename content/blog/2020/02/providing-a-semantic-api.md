@@ -13,7 +13,7 @@ type = "post"
 
 _This is part of [a series of posts](https://www.joshwulf.com/categories/stackoverflowed/) where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer. There is nothing wrong with code that runs, **and** "There is no such thing as good coding, only good refactoring"._
 
-A _Semantic API_ is "an interface that provides information about usage of the interface" (_my definition_). It can be through method naming, parameter naming, JS Doc comments, TypeScript typings, or (best) all three.
+A _Semantic API_ is "an interface that provides information about usage of the interface" (_my definition_). It can be through method naming, parameter naming, JS Doc comments, TypeScript typings, or (best) all of the above.
 
 The meaning of "_semantics_", according to the Oxford Dictionary:
 
