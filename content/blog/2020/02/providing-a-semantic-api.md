@@ -13,6 +13,8 @@ type = "post"
 
 _This is part of [a series of posts](https://www.joshwulf.com/categories/stackoverflowed/) where I refactor code from StackOverflow questions, with a discussion of the changes. One of the great things about JavaScript is how scalable it is. You can start with a simple script, and there is nothing wrong with that. Usually these posts are about refactorings other than what the questioner asked about, and would be out of scope for the SO answer. There is nothing wrong with code that runs, **and** "There is no such thing as good coding, only good refactoring"._
 
+A _Semantic API_ is "an interface that provides information about usage of the interface" (_my definition_). It can be through method naming, parameter naming, JS Doc comments, TypeScript typings, or (best) all three.
+
 The meaning of "_semantics_", according to the Oxford Dictionary:
 
 > The branch of linguistics and logic concerned with meaning. There are a number of branches and subbranches of semantics, including formal semantics, which studies the logical aspects of meaning, such as sense, reference, implication, and logical form, lexical semantics, which studies word meanings and word relations, and conceptual semantics, which studies the cognitive structure of meaning.
@@ -22,8 +24,6 @@ Computer programming is an exercise in applied linguistics. It is precisely spec
 Writing code that the computer can understand (and that executes correctly) is only one level of the practice of Computer Programming. As Martin Fowler [puts it](https://medium.com/young-coder/5-famous-programming-quotes-explained-4da607906c1): 
 
 > Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
-
-A _Semantic API_ is "an interface that provides information about usage of the interface" (_my definition_). It can be through method naming, parameter naming, JS Doc comments, TypeScript typings, or (best) all three.
 
 Providing a Semantic API is part of improving the [developer ergonomics](https://ngeor.com/2017/09/16/ergonomics-and-apis.html), or Dev UX, of your code.
 
