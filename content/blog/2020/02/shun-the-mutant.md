@@ -170,7 +170,7 @@ Are you building an actual state machine?
 
 If no, then use `const`. 
 
-If yes, first check to see if a well-tested, existing state machine, like an Array method, can do what you want to achieve.
+If yes, first check to see if a well-tested, existing state machine, like an [Array method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), can do what you want to achieve.
 
 If not, then refactor the code to put your state machine in its own isolated context, with no side-ways dependencies, so you can test the _operation of the state machine itself_.
 
