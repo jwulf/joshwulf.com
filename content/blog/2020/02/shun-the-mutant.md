@@ -2,12 +2,12 @@
 author = "Josh Wulf"
 categories = ["javascript", "programming", "dogma"]
 date = "2020-02-26"
-description = "The case for const"
+description = "TLDR; only use variables for actual mutable state, and put them inside testable state machines."
 featured = "mutant.png"
 featuredalt = ""
 featuredpath = "date"
 linktitle = ""
-title = "Shun the Mutant"
+title = "Shun the Mutant - the case for const"
 type = "post"
 +++
 
