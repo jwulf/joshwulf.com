@@ -120,7 +120,7 @@ Here is what it looks like with that done (I left `error` in to document both re
 
 The logic of the program is clearly expressed. You can see deploy and error outcomes, and you see: buffer or files - if buffer, deploy; otherwise read the files and then either report the error or deploy.
 
-And the functions with no dependencies are now unit testable in isolation. I put them into two sub-directories: `pure`, and `impure` (for those with side-effects). There are three pure functions that do nothing other than transform data passed into them and return it, and one impure function that reads from the file system.
+What I realised as soon as I moved them out, is that the functions with no dependencies are unit testable in isolation. I put them into two sub-directories: `pure`, and `impure` (for those with side-effects). There are three pure functions that do nothing other than transform data passed into them and return it, and one impure function that reads from the file system.
 
 These are all easily testable - the impure file reading function needs a little more setup to test. My code is now more expressive of its intent, and testable.
 
