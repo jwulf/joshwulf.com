@@ -108,4 +108,24 @@ He helped me out by lifting the file reader into the Either context. The code fr
 
 Rather than a These, it uses a construct called a [`Validation`](https://gcanti.github.io/fp-ts/modules/ValidationT.ts.html).
 
+## Addendum on testability
+
+After I published this article, I got some feedback on it from the FP Chat Slack:
+
+>  I would've usually extracted any pure functions created during the refactor from the body of the original function.
+
+Here is what it looks like with that done (I left `error` in to document both return values):
+
+{{< gist jwulf 5ffa03d23baa993635a69dd62ebe1e0f >}}
+
+The logic of the program is clearly expressed. You can see deploy and error outcomes, and you see: buffer or files - if buffer, deploy; otherwise read the files and then either report the error or deploy.
+
+And the functions with no dependencies are now unit testable in isolation. I put them into two sub-directories: `pure`, and `impure` (for those with side-effects). There are three pure functions that do nothing other than transform data passed into them and return it, and one impure function that reads from the file system.
+
+These are all easily testable - the impure file reading function needs a little more setup to test. My code is now more expressive of its intent, and testable.
+
+With the non-FP implementations - even the fp-inspired refactor - you are forced to mentally reason through the execution of the code to understand what it does; and it is tightly coupled - meaning that you have to test the composition of side-effects _and_ logic to ensure that the entire method does what it says on the box, in all permutations.
+
+This refactor is a functional specification of the method, plus some unit-testable functions that are composed to implement it.
+
 **About me**: _I’m a Developer Advocate at [Camunda](https://camunda.com), working primarily on the [Zeebe Workflow engine for Microservices Orchestration](https://zeebe.io), and the maintainer of the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node). In my spare time, I build [Magikcraft](https://github.com/Magikcraft), a platform for programming with JavaScript in Minecraft._
