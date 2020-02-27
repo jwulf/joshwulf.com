@@ -286,7 +286,7 @@ Another potential bug that we can detect here is a local function passing in eit
 
 We can write helper functions for this, and call them on all operations where it is a requirement:
 
-{{ gist jwulf a0664d542037c385b81e8495811c537d }}
+{{< gist jwulf a0664d542037c385b81e8495811c537d >}}
 
 Here is how we use this:
 
