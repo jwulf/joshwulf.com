@@ -2,12 +2,12 @@
 author = "Josh Wulf"
 categories = ["javascript", "programming", "zeebe", "fp-ts"]
 date = "2020-02-27"
-description = "Using the fp-ts library to refactor Zeebe Node"
+description = "Don't worry, you don't need to FP to use it, it's internal!"
 featured = "zeebe-node.png"
 featuredalt = ""
 featuredpath = "date"
 linktitle = ""
-title = "A Functional Refactor of Zeebe Node"
+title = "A Functional Refactor of Zeebe Node with fp-ts"
 type = "post"
 +++
 
