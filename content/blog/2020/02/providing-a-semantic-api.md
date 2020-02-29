@@ -71,6 +71,7 @@ I also changed the name of `memArray` to `GlobalMembersArray`. This is not a new
 
 Finally, I changed the name of `memObj1` to `member1`. It is a small change, but it increases the overall comprehensibility of the code.
 
+<a name="second-refactor"></a>
 ## Second Refactor 
 
 The function as it stands now communicates little information about its parameters.
