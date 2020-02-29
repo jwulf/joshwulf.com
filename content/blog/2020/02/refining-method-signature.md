@@ -62,7 +62,9 @@ You will always have to refactor as the domain you are modelling becomes clearer
 
 At the same time, _this_ is not one of those "_now I can see..._" concerns. 
 
-I willfully violated a coding principle where I had full knowledge at the time. Always write the best code you can at the time at the time, knowing you will have to refactor it later. You are introducing enough technical debt with your keyboard with every line of clean code that you write. You can't afford to add this as well.
+I willfully violated a coding principle where I had full knowledge at the time. 
+
+_Always_ write the best code possible _at the time you write it_ - while knowing full well that you will have to refactor it later. You are introducing enough technical debt with your keyboard with every line of clean code that you write. You can't afford to add this as well.
 
 Most of the scratch code you write will go nowhere, and you will never experience the impact of sloppy coding practices. However, the code that does survive will cost you. You should write every line of code as if you have to maintain it for ten years, as a discipline.
 
