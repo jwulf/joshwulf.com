@@ -59,7 +59,7 @@ _Any_ message presented to the user while they are developing their model of the
 
 I mean _any_ message. A DEBUG level informational message in the Zeebe broker log has been a source of confusion for new users. They frequently interpret it as an error message ([an example from the Zeebe Forum](https://forum.zeebe.io/t/error-jobs-of-type-not-available-but-workflow-deploys-and-completes/1048)), and we are refactoring it to either reword it - taking into account the user's uncertainty - or just take it out completely ([GitHub issue "Reword Blocking request DEBUG Message"](https://github.com/zeebe-io/zeebe/issues/3890)).
 
-This particular message in the Zeebe Node client - that _every single connection_ to Camunda Cloud _always_ emits an error, is **terrible** for UX. 
+This particular message in the Zeebe Node client - that _every single connection_ to Camunda Cloud _always_ emits an error - is **terrible** for UX. 
 
 New users have enough uncertainty already. This behaviour guarantees that _even if they do everything correctly_, they are still going to be thinking: "_I've done something wrong, it's not working._" 
 
