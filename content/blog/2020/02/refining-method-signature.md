@@ -88,7 +88,11 @@ _Everything_ in that statement is unknown to a new user. Having to explain each 
 
 I also found myself having to supply information to the method every time I used it that was just thrown away. 
 
-With over 6k weekly downloads of the library from NPM, and multiple downstream packages, I can't just change the signature in a breaking way. The problems of success.
+With over 6k weekly downloads of the library from NPM, and multiple downstream packages, I can't just change the signature in a breaking way. That breaks it for a lot of people.
+
+{{< fancybox path="/img/2020/02" file="npm-downloads.png" caption="" gallery="Zeebe Node" >}}
+
+The problems of success.
 
 ## Making a required parameter "optional"
 
