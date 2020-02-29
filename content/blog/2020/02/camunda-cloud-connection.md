@@ -13,7 +13,7 @@ type = "post"
 
 Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the Zeebe Node client against a running instance of a Camunda Cloud Zeebe cluster.
 
-I was immediately forced to deal with something I'd been conveniently ignoring - Camunda Cloud gRPC connections _always_ fail initially, before eventually succeeding.
+I was immediately forced to deal with something I'd been conveniently ignoring: **Camunda Cloud gRPC connections _always_ report failure initially, before eventually succeeding**.
 
 This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual "READY" state.
 
