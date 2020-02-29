@@ -108,9 +108,9 @@ Marginally better. It reduces cognitive load when encountering the library for t
 
 ## Method Overloads 
 
-In statically-compiled languages such as Java and C# you can provide an alternate method implementation with the same name but a different parameter signature. On compilation, the compiler resolves the one you mean from a combination of the method name and the parameter signature, and links the call to the correct implementation.
+In statically-compiled languages such as Java and C#, you can provide an alternate method implementation with the same name but a different parameter signature. On compilation, the compiler resolves the one you mean from a combination of the method name and the parameter signature, and links the call to the correct implementation.
 
-With TypeScript you can provide different parameter signatures for the same method, but because all type information is erased at run-time, you have to handle the various signatures in a single implementation.
+With TypeScript, you can provide different parameter signatures for the same method, but because all type information is erased at run-time, you have to handle the various signatures in a single implementation.
 
 Redemption from my original sin was going to cost. The internal complexity of the implementation would go up having to deal with this design error in a fully backwards compatible way.
 
