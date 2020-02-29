@@ -26,7 +26,7 @@ The `ZBClient.createWorker()` method - to create a new job worker process - take
 
 Events viewed in the exporter records contain information like "_Worker THX-1138 activated 3 jobs_".
 
-It turns out, after using the library extensively myself, and observing others use it, that this parameter is not widely used. In fact, the [Zeebe NestJS integration](https://www.npmjs.com/package/@payk/nestjs-zeebe), (written by [Dan Shapir] at [Pay-K](http://www.payk.com.au/)) which integrates the Zeebe Node client with the excellent NestJS framework, auto-assigns ids to the workers. The ability to assign a specific `id` for the worker is not exposed to the user.
+It turns out, after using the library extensively myself, and observing others use it, that this parameter is not widely used. In fact, the [Zeebe NestJS integration](https://www.npmjs.com/package/@payk/nestjs-zeebe), (written by [Dan Shapir](https://github.com/danshapir) at [Pay-K](http://www.payk.com.au/)) which integrates the Zeebe Node client with the excellent NestJS framework, auto-assigns ids to the workers. The ability to assign a specific `id` for the worker is not exposed to the user.
 
 That's not to say that it will not be used in the future. In larger systems with more worker processes than the ones currently in use, the id may well be derived from an environment variable, to allow misbehaving worker instances (including out-of-date ones) to be identified and dealt with.
 
