@@ -18,7 +18,7 @@ type = "post"
   image = "https://www.joshwulf.com/img/2020/02/zeebe-state-machine.png"
 +++
 
-Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node) against a running instance of a Camunda Cloud Zeebe cluster.
+Preparing for the launch of [Camunda Cloud](https://camunda.io), I turned on continuous integration testing for the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node) against a running instance of a Camunda Cloud Zeebe cluster.
 
 I was immediately forced to deal with something I'd been conveniently ignoring: 
 
