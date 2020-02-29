@@ -53,7 +53,7 @@ There are four things that can be at the cause of this:
 * There is a bug in the library.
 * The user's expectation is incorrect (actual behaviour is correct, expected behaviour is incorrect).
 
-Surfacing that last one - _the unexamined hypotheses that the user holds about the system as their working model of the system_ - is why bug reports request "Expected Behaviour" and "Actual Behaviour" in their templates.
+Surfacing that last one - _the unexamined hypotheses that the user holds about the system as their working model of the system_ - is why bug reports request ["Expected Behaviour" and "Actual Behaviour"](https://knowthecode.io/labs/reordering-hook-not-working-first-post-problem-solving-lab/episode-3) in their templates.
 
 _Any_ message presented to the user while they are developing their model of the system _must_ take into account that the user's model is unformed, and also that the user is usually not _consciously_ forming the model. 
 
