@@ -32,6 +32,8 @@ How that looks for a user:
 
 {{< fancybox path="/img/2020/02" file="camunda-cloud-connection-characteristics.png" caption="" gallery="Camunda Cloud" >}}
 
+(_This is using the new, in 0.23.0-alpha.1, default `ZBSimpleLogger` that outputs unstructured human-readable strings_)
+
 I had been ignoring this as "expected behaviour (_for now_)", and my [reticular activating system](http://matizmo.com/the-importance-of-ras-and-its-implications-with-your-content-the-cocktail-party-phenomenon/) had conveniently made it invisible to me.
 
 The failure of the integration tests made it abundantly clear that this is actually _not_ expected behaviour in the formal specifications for the client (_the tests_).
