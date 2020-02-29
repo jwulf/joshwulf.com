@@ -66,7 +66,9 @@ I willfully violated a coding principle where I had full knowledge at the time.
 
 _Always_ write the best code possible _at the time you write it_ - while knowing full well that you will have to refactor it later. You are introducing enough technical debt with your keyboard with every line of clean code that you write. You can't afford to add this as well.
 
-Most of the scratch code you write will go nowhere, and you will never experience the impact of sloppy coding practices. However, the code that does survive will cost you. You should write every line of code as if you have to maintain it for ten years, as a discipline.
+Most of the scratch code you write will go nowhere, and you won't experience the full impact of sloppy coding practices. It's easy to write and throw away thousands of lines of code, and go: "_What's the big deal?"
+
+ However, the code that _does_ survive will cost you. You should write every line of code as if you have to maintain it for ten years, as a discipline.
 
 _Aside #1_: I told someone on StackOverflow the other day: "_You should always make sure the code runs and is formatted. That will solve 35% of your problems as a professional developer_". Poorly formatted code in questions reveals poorly structured thinking. If you just take on structuring your code properly, the structure of the domain problems become soluble in many cases. 
 
