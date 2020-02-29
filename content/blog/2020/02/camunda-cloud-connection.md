@@ -81,7 +81,7 @@ That implementing connection characteristics requires changes to multiple compon
 
 It is time for a significant refactor. The time required for this refactor is not trivial, and I conveniently ignored the error message until it became a failing test suite, then looked long and hard at the code before committing to this. 
 
-This is a significant part of the Zeebe Node client - managing the state of the gRPC connection and providing an ergonomic API to handle various failure conditions. However, you don't have to be Einstein to realise that:
+This is a significant part of the Zeebe Node client - managing the state of the gRPC connection and providing an ergonomic API to signal and handle various failure conditions. However, you don't have to be Einstein to realise that:
 
 > “We can not solve our problems with the same level of thinking that created them.” - Albert Einstein
 
