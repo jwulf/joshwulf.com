@@ -114,7 +114,7 @@ With TypeScript you can provide different parameter signatures for the same meth
 
 Redemption from my original sin was going to cost. The internal complexity of the implementation would go up having to deal with this design error in a fully backwards compatible way.
 
-I held off on it, and finally bit the bullet and did it in the work for the 0.23.0-alpha.1 release, providing an alternate method signature.
+I held off on it, and finally bit the bullet and did it in the work for the 0.23.0-alpha.1 release, providing an alternate method signature, one that no longer requires the worker id as an argument.
 
 Why didn't I just go all the way and move to a single parameter object? Because I'm an idiot, maybe. I wanted it to be a gradual change to avoid having to document and test two radically different signatures. Maybe that's a mistake that will pile more technical debt in.
 
