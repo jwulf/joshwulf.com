@@ -9,11 +9,19 @@ featuredpath = "date"
 linktitle = ""
 title = "Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One"
 type = "post"
+[twitter]
+  card = "Building a state machine with business rules to deal with connection characteristics"
+  site = "@sitapati"
+  title = "Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part One"
+  description = "Building a state machine with business rules to deal with connection characteristics"
+  image = "https://www.joshwulf.com/img/2020/02/zeebe-state-machine.png"
 +++
 
-Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the Zeebe Node client against a running instance of a Camunda Cloud Zeebe cluster.
+Preparing for the launch of Camunda Cloud, I turned on continuous integration testing for the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node) against a running instance of a Camunda Cloud Zeebe cluster.
 
-I was immediately forced to deal with something I'd been conveniently ignoring: **Camunda Cloud gRPC connections _always_ report failure initially, before eventually succeeding**.
+I was immediately forced to deal with something I'd been conveniently ignoring: 
+
+**Camunda Cloud gRPC connections _always_ report failure initially, before eventually succeeding**.
 
 This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual "READY" state.
 
@@ -23,17 +31,17 @@ How that looks for a user:
 
 {{< fancybox path="/img/2020/02" file="camunda-cloud-connection-characteristics.png" caption="" gallery="Camunda Cloud" >}}
 
-I had been ignoring this as "expected behaviour", and my [reticular activating system](http://matizmo.com/the-importance-of-ras-and-its-implications-with-your-content-the-cocktail-party-phenomenon/) had conveniently made it invisible to me.
+I had been ignoring this as "expected behaviour (_for now_)", and my [reticular activating system](http://matizmo.com/the-importance-of-ras-and-its-implications-with-your-content-the-cocktail-party-phenomenon/) had conveniently made it invisible to me.
 
 The failure of the integration tests made it abundantly clear that this is actually _not_ expected behaviour in the formal specifications for the client (_the tests_).
 
 ## Designing for Developer UX 
 
-This is bad developer (user) experience (UX) design.
+This is bad developer experience (UX) design.
 
-When developers are using Zeebe Node for the first time against Camunda Cloud, they don't know what they are doing, _and_ they don't know if they are doing it right. 
+When developers are using Zeebe Node for the first time against Camunda Cloud, they don't know what they are doing _and_ they don't know if they are doing it right. 
 
-When it is not working as they expect, they don't know if their expectation is erroneous or they have done something incorrectly. Users are often unaware even that they _have_ a model of the system composed of expectations they hold as a hypothesis. Instead, they think: "_Something is wrong. This is not working._"
+When it is not working as they expect, they don't know whether it is that their expectation is erroneous, or they have done something incorrectly. Users are often unaware even that they _have_ a model of the system composed of expectations they hold as a hypothesis. Instead, they think: "_Something is wrong. This is not working._"
 
 There are four things that can be at the cause of this:
 
@@ -44,13 +52,15 @@ There are four things that can be at the cause of this:
 
 Surfacing that last one - _the unexamined hypotheses that the user holds about the system as their working model of the system_ - is why bug reports request "Expected Behaviour" and "Actual Behaviour" in their templates.
 
-_Any_ message presented to the user while they are developing their model of the system _must_ take into account that the user's model is unformed, and the user is usually not consciously forming the model. I mean _any_ message. A DEBUG level informational message in the Zeebe broker log has been a source of confusion for new users. They frequently interpret it as an error message ([an example from the Zeebe Forum](https://forum.zeebe.io/t/error-jobs-of-type-not-available-but-workflow-deploys-and-completes/1048)), and we are refactoring it to either reword it - taking into account the user's uncertainty - or just take it out completely ([GitHub issue "Reword Blocking request DEBUG Message"](https://github.com/zeebe-io/zeebe/issues/3890)).
+_Any_ message presented to the user while they are developing their model of the system _must_ take into account that the user's model is unformed, and also that the user is usually not _consciously_ forming the model. 
+
+I mean _any_ message. A DEBUG level informational message in the Zeebe broker log has been a source of confusion for new users. They frequently interpret it as an error message ([an example from the Zeebe Forum](https://forum.zeebe.io/t/error-jobs-of-type-not-available-but-workflow-deploys-and-completes/1048)), and we are refactoring it to either reword it - taking into account the user's uncertainty - or just take it out completely ([GitHub issue "Reword Blocking request DEBUG Message"](https://github.com/zeebe-io/zeebe/issues/3890)).
 
 This particular message in the Zeebe Node client - that _every single connection_ to Camunda Cloud _always_ emits an error, is **terrible** for UX. 
 
 New users have enough uncertainty already. This behaviour guarantees that _even if they do everything correctly_, they are still going to be thinking: "_I've done something wrong, it's not working._" 
 
-And if they _have_ done something incorrectly and it is not working, this message provides them with no clue as to what _that_ is, and will lead them on a [wild-goose chase](https://en.wiktionary.org/wiki/wild-goose_chase).
+And if they _have_ done something incorrectly and it is really not working, this message provides them with no clue as to what _that_ is, and will lead them on a [wild-goose chase](https://en.wiktionary.org/wiki/wild-goose_chase).
 
 It has to go. 
 
@@ -66,7 +76,7 @@ See the article "[Avoiding Global Mutable State in Browser JS](https://www.joshw
 
 That implementing connection characteristics requires changes to multiple components is a [code smell](https://en.wikipedia.org/wiki/Code_smell) that indicates there is a first-class concern with no, or an incorrectly bounded, materialised entity in the code.
 
-It is time for a significant refactor. The time required for this refactor is not trivial, and I looked long and hard at the code before determining this (_and ignored the error message until it became a failing test suite_). 
+It is time for a significant refactor. The time required for this refactor is not trivial, and I conveniently ignored the error message until it became a failing test suite, then looked long and hard at the code before committing to this. 
 
 This is a significant part of the Zeebe Node client - managing the state of the gRPC connection and providing an ergonomic API to handle various failure conditions. However, you don't have to be Einstein to realise that:
 
