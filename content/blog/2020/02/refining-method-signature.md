@@ -96,7 +96,7 @@ The problems of success.
 
 ## Making a required parameter "optional"
 
-The first thing I did, for my own sanity, is make that first parameter - `id` - nullable. So the signature changed like this:
+The first thing I did, for my own sanity, is make that first parameter - `id` - nullable (assigning a UUID if `null` is passed in). So the signature changed like this:
 
 {{< gist jwulf 2bed7fa5f6f084fed317cd4ba6a5e731 >}}
 
