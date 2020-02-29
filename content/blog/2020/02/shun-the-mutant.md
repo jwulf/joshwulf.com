@@ -1,6 +1,6 @@
 +++
 author = "Josh Wulf"
-categories = ["javascript", "programming", "dogma"]
+categories = ["javascript", "programming", "stackoverflowed"]
 date = "2020-02-26"
 description = "TLDR; only use variables for actual mutable state, and put them inside testable state machines."
 featured = "mutant.png"
