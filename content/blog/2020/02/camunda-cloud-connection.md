@@ -40,7 +40,7 @@ The failure of the integration tests made it abundantly clear that this is actua
 
 ## Designing for Developer UX 
 
-This is bad developer experience (UX) design.
+This is bad Developer Experience (DX) design.
 
 When developers are using Zeebe Node for the first time against Camunda Cloud, they don't know what they are doing _and_ they don't know if they are doing it right. 
 
