@@ -112,11 +112,11 @@ In statically-compiled languages such as Java and C#, you can provide multiple m
 
 With TypeScript, you can provide different parameter signatures for the same method, but because all type information is erased at run-time, you have to handle the various signatures in a single implementation.
 
-Redemption from my original sin was going to cost. The internal complexity of the implementation would go up having to deal with this design error in a fully backwards compatible way.
+Redemption from my original sin was going to cost. The internal complexity of the implementation would go up having to deal with this design error in a fully backwards-compatible way.
 
 I held off on it, and finally bit the bullet and did it in the work for the 0.23.0-alpha.1 release, providing an alternate method signature, one that no longer requires the worker id as an argument.
 
-Why didn't I just go all the way and move to a single parameter object? Because I'm an idiot, maybe. I wanted it to be a gradual change to avoid having to document and test two radically different signatures. Maybe that's a mistake that will pile more technical debt in.
+Why didn't I just go all the way and move to a single parameter object? Because I'm an idiot, maybe. I wanted it to be a gradual change to avoid having to document and test two radically different signatures. Maybe that's a mistake that will pile more technical debt in. I've designed it to reduce that, by encapsulating the new concern that I've added (run-time decoding of the signature).
 
 My plan is to add the third method overload to a single parameter object in a future release, if it makes sense. The jury is still out on that. If it needs extension, that will definitely be part of that work.
 
