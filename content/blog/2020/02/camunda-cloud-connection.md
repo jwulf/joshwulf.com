@@ -17,7 +17,7 @@ I was immediately forced to deal with something I'd been conveniently ignoring: 
 
 This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual "READY" state.
 
-This is a characteristic of this connection that differs from the behaviour of the non-proxied connection over a Docker network (the current CI test environment in CircleCI) or against a non-proxied broker on a remote machine (my personal production setups not using Camunda Cloud).
+This "connection characteristic" differs from the behaviour of the non-proxied connection over a Docker network (the current CI test environment in CircleCI) or against a non-proxied broker on a remote machine (my personal production setups not using Camunda Cloud).
 
 What that looks like for a user is:
 
