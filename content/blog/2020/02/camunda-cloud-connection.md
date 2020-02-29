@@ -17,21 +17,23 @@ I was immediately forced to deal with something I'd been conveniently ignoring: 
 
 This is because the connection to Camunda Cloud is via a TLS-enabled Nginx reverse proxy with OAuth authentication. This causes the current gRPC client state machine to emit intermediate connection failure events before emitting an eventual "READY" state.
 
-This "connection characteristic" differs from the behaviour of the non-proxied connection over a Docker network (the current CI test environment in CircleCI) or against a non-proxied broker on a remote machine (my personal production setups not using Camunda Cloud).
+This "connection characteristic" differs from the behaviour of the non-proxied connection over a Docker network (_the current CI test environment in CircleCI_) or against a non-proxied broker on a remote machine (_my personal production setups not using Camunda Cloud_).
 
-What that looks like for a user is:
+How that looks for a user:
 
 {{< fancybox path="/img/2020/02" file="camunda-cloud-connection-characteristics.png" caption="" gallery="Camunda Cloud" >}}
 
 I had been ignoring this as "expected behaviour", and my [reticular activating system](http://matizmo.com/the-importance-of-ras-and-its-implications-with-your-content-the-cocktail-party-phenomenon/) had conveniently made it invisible to me.
 
-The failure of the integration tests made it abundantly clear that this is actually _not_ expected behaviour in the formal specifications for the client (the tests).
+The failure of the integration tests made it abundantly clear that this is actually _not_ expected behaviour in the formal specifications for the client (_the tests_).
 
 ## Designing for Developer UX 
 
-It is bad user experience (UX) design.
+This is bad developer (user) experience (UX) design.
 
-When developers are using Zeebe Node for the first time against Camunda Cloud, they don't know what they are doing, _and_ whether they are doing it right. When it is not working as they expect, they don't know if their expectation is erroneous or they have done something incorrectly. Users are often unaware even that they _have_ a model of the system composed of expectations they hold as a hypothesis. Instead, they think: "_Something is wrong. This is not working._"
+When developers are using Zeebe Node for the first time against Camunda Cloud, they don't know what they are doing, _and_ they don't know if they are doing it right. 
+
+When it is not working as they expect, they don't know if their expectation is erroneous or they have done something incorrectly. Users are often unaware even that they _have_ a model of the system composed of expectations they hold as a hypothesis. Instead, they think: "_Something is wrong. This is not working._"
 
 There are four things that can be at the cause of this:
 
