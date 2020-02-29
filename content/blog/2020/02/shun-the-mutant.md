@@ -128,6 +128,7 @@ All of these mutable references create code that is complex to reason about, and
 
 Once all the faux variables have been renamed to `const`, a variable that is mutated inside a function usually indicates the presence of a custom state machine. Sometimes a custom state machine is necessary, but less often than you would think.
 
+<a name="valid-use-of-variables"></a>
 ## Valid use of variables 
 
 Valid uses for a variable can be to represent internal state, for example:
