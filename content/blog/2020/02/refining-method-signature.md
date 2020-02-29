@@ -66,7 +66,7 @@ I willfully violated a coding principle where I had full knowledge at the time.
 
 _Always_ write the best code possible _at the time you write it_ - while knowing full well that you will have to refactor it later. You are introducing enough technical debt with your keyboard with every line of clean code that you write. You can't afford to add this as well.
 
-Most of the scratch code you write will go nowhere, and you won't experience the full impact of sloppy coding practices. It's easy to write and throw away thousands of lines of code, and go: "_What's the big deal?"
+Most of the scratch code you write will go nowhere, and you won't experience the full impact of sloppy coding practices. It's easy to write and throw away thousands of lines of code, and go: "_What's the big deal?_"
 
  However, the code that _does_ survive will cost you. You should write every line of code as if you have to maintain it for ten years, as a discipline.
 
@@ -150,7 +150,7 @@ Now you have to decode the call at run-time by examining the actual parameters t
 
 That is why the implementation signature (not shown to consumers) contains parameter names like ` taskHandlerOrOptions`.
 
-To reduce the internal complexity of the method (_that's_ about creating a worker, not decoding parameters!), and also to reduce the work required to support an eventual single object parameter, I moved the parameter decoding to a unit testable pure function:
+To reduce the internal complexity of the method (_that's_ about creating a worker, not decoding parameters!), and also to reduce the work required to support an eventual single object parameter, I moved the parameter decoding to a unit testable pure function.
 
 The entire impact on the _internal_ complexity of the method is this:
 
@@ -166,11 +166,11 @@ That's a lot of internal complexity required to go from:
 
 {{< gist jwulf 183b62dce9d1cfe70f05201f6599495a >}}
 
-to this (with backwards compatibility):
+to this, _with backwards-compatibility_:
 
 {{< gist jwulf 4a3c8a3c10d3dc886b49b573a5c4e8fc >}}
 
-Going to the third signature, with a single object parameter, will be a small amount of additional code. A new signature overload, a line or two in the decoder, then changes to documentation and a test or two.
+Going to the third signature, with a single object parameter, will be a small amount of additional code: a new signature overload, a line or two in the decoder, then changes to documentation, and a test or two (_because I don't touch the implementation, just the run-time decoder_).
 
 And to think:
 
