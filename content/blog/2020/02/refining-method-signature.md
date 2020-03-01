@@ -174,7 +174,7 @@ Going to the third signature, with a single object parameter, will be a small am
 
 And to think:
 
- **All that code could have been avoided by using an object parameter for a method that takes more than one parameter**
+ **All that code could have been avoided by using an object parameter for a method that takes more than one parameter**.
 
 /_makes note_.
 
