@@ -122,6 +122,8 @@ My plan is to add the third method overload to a single parameter object in a fu
 
 This is not released yet, so there is still time for me to deliberate and go all in on the object parameter.
 
+_**Update:** I did it. It has a single parameter signature now, as well._
+
 ## Creating a method overload in TypeScript
 
 Here is what violating the single parameter principle will cost you, if you have to maintain backwards-compatibility:

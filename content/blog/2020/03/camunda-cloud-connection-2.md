@@ -8,7 +8,7 @@ featuredalt = ""
 featuredpath = "date"
 linktitle = ""
 title = "Refactoring the Zeebe Node gRPC State Machine for Camunda Cloud: Part Two"
-image = ""
+image = "camunda-cloud-after.png"
 type = "post"
 [twitter]
   card = "Building a state machine with business rules to deal with connection characteristics"
