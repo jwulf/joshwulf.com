@@ -200,4 +200,12 @@ The adaptive behaviour is completely disabled when the log level is set to DEBUG
 
 Next: get the tests to pass.
 
+## And....
+
+{{< fancybox path="/img/2020/03" file="tests-green.png" caption="" gallery="Zeebe Node" >}}
+
+**Yassss!**
+
+(_Although this is against the local broker. Not green on Camunda Cloud yet..._)
+
 **About me**: _I’m a Developer Advocate at [Camunda](https://camunda.com), working primarily on the [Zeebe Workflow engine for Microservices Orchestration](https://zeebe.io), and the maintainer of the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node). In my spare time, I build [Magikcraft](https://github.com/Magikcraft), a platform for programming with JavaScript in Minecraft._
