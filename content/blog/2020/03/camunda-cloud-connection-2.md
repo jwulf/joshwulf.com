@@ -156,7 +156,7 @@ Now I can modify my Middleware to construct an intercepted GrpcClient that behav
 
 ## Event-driven: Spooky Action at a Distance 
 
-When React first came out, one of the patterns to make your components communicate at a distance across the component hierarchy was to emit events. That pattern went out, because in lead to unpredictable and hard to reason about architectures.
+When React first came out, one of the patterns to make your components communicate at a distance across the component hierarchy was to [emit events](https://www.sderosiaux.com/articles/2015/02/12/how-to-communicate-between-react-components/). That pattern went out, because in lead to unpredictable and hard to reason about architectures.
 
 Adding namespaced events helps us out here, but - apart from the hell I just created for myself [changing filename casings on a case-insensitive file system](https://stackoverflow.com/questions/17683458/how-do-i-commit-case-sensitive-only-filename-changes-in-git/17688308#17688308) - the GrpcClient just went into a stackoverflow loop.
 
