@@ -132,6 +132,8 @@ OK, I create a new ZBLogger in the middleware. Now it looks like this:
 
 The GrpcClient already emits events. You can chain event listeners to instances of ZBClient and ZBWorker to react to connection ('ready') and disconnection ('error') events already. I can't change the names of those, because they are a public API.
 
+_Update: man, emitting an 'error' event caused my program to inexplicably crash and had me debugging for 30 minutes. Eventually, I tracked it down, and consulted the README - the event is `connectionError`. [Emitting 'error' with no listeners throws](https://medium.com/better-programming/using-events-in-node-js-the-basics-9a9c44dcbe30)._
+
 I should namespace events for the Middleware so it clear where they are going, rather than using plain strings. 
 
 I will have to redirect all events through the middleware, actually - otherwise custom listeners on clients connected to Camunda Cloud will not get the benefit of the middleware.
