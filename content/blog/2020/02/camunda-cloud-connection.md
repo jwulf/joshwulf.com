@@ -120,4 +120,6 @@ This may complicate the GRPCClient state machine by adding an additional state m
 
 OK, let the fun begin!
 
+[Check out Part 2 here.](https://joshwulf.com/blog/2020/03/camunda-cloud-connection-2/)
+
 **About me**: _I’m a Developer Advocate at [Camunda](https://camunda.com), working primarily on the [Zeebe Workflow engine for Microservices Orchestration](https://zeebe.io), and the maintainer of the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node). In my spare time, I build [Magikcraft](https://github.com/Magikcraft), a platform for programming with JavaScript in Minecraft._
