@@ -30,7 +30,7 @@ To do it, they declare no less than four variables. Only one of these is an actu
 
 See this previous article about variables and `const`: "[Shun the mutant - the case for `const`](http://joshwulf.com/blog/2020/02/shun-the-mutant/), for more explanation about that distinction.
 
-The actual variable, though - _i_ - is a red flag that we are looking at a _state machine_. 
+The actual variable, though - _i_ - is a red flag that we are looking at a _state machine_.
 
 Anywhere in your code that you have an _actual_ mutable variable whose value you must keep track of over time, you have a state machine.
 
@@ -38,13 +38,13 @@ _State_ and _time_ are the two biggest sources of complexity in an application. 
 
 To wildly introduce state like this is to unleash Pandora's box on your application. You should be pushing all _actual_ state representation out of your application logic, not creating it inline where it doesn't even exist!
 
-Now you have created bug surface areas for "off-by-one" errors and "array index out of bounds" errors. 
+Now you have created bug surface areas for "off-by-one" errors and "array index out of bounds" errors.
 
 You had one job - now you are juggling four variables, and one of them is an actual footgun (the other three are just pretending to be).
 
 There is _already_ a state machine for a 1:1 data transformation of elements of an array: `Array.map`. It encapsulates this functionality.
 
-Here is the polyfill for `Array.prototype.map`, from MDN:
+Here is the polyfill for `Array.prototype.map`, from [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map):
 
 {{< gist jwulf 05a31e21fa38937508bf17a39c1476d9 >}}
 
@@ -54,7 +54,7 @@ That code is a machine that is concerned with doing one thing - _apply a functio
 
 There is no **mixing of concerns here**.
 
-The code from StackOverflow does _two_ things at the same time. 
+The code from StackOverflow does _two_ things at the same time.
 
 We can see that, because this code does _one_ of them - apply a transform to each element of an array and create a new array.
 
@@ -86,9 +86,9 @@ If you were programming this way, then you would invent `Array.map` from first p
 
 <a name = "how-to-use-array-map"></a>
 
-## How to use Array.map 
+## [How to use Array.map](#how-to-use-array-map)
 
-Here is the original code again: 
+Here is the original code again:
 
 {{< gist jwulf b46b22b2b293f87dae2e2b384e7b4172 >}}
 
@@ -104,7 +104,7 @@ That's it.
 
 Functions over data. That's application logic.
 
-Functions over mutable state, or functions over time are state machines. 
+Functions over mutable state, or functions over time are state machines.
 
 Don't mix them together in your code, and your life will be much, much simpler.
 
