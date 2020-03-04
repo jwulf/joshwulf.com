@@ -73,7 +73,7 @@ There is no API in the broker for batching jobs. You can request a maximum numbe
 
 So, all the management of the batching takes place on the client.
 
-To implement this, I used a pattern that I described in the "[Valid Use of Variables](https://jwulf.github.io/blog/2020/02/shun-the-mutant#valid-use-of-variables)" section of the article "[Shun the Mutant - The case for `const`](https://jwulf.github.io/blog/2020/02/shun-the-mutant)", wrapping the batching functionality into a small state machine with an API:
+To implement this, I used a pattern that I described in the "[Valid Use of Variables](https://joshwulf.com/blog/2020/02/shun-the-mutant#valid-use-of-variables)" section of the article "[Shun the Mutant - The case for `const`](https://joshwulf.com/blog/2020/02/shun-the-mutant)", wrapping the batching functionality into a small state machine with an API:
 
 Here is a BPMN diagram of the state machine:
 
