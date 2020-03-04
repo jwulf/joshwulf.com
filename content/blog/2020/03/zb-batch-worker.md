@@ -4,11 +4,8 @@ categories = ["javascript", "programming", "zeebe", "typescript"]
 date = "2020-03-03"
 title = "The Zeebe Node Batch Worker"
 description = "A new Zeebe Node worker allows you to batch access to external resources, for great justice."
-featured = "batch-worker-feature.jpg"
-featuredalt = ""
-featuredpath = "date"
 linktitle = ""
-image = "/img/2020/03/batch-worker-feature.jpg"
+images = ["/img/2020/03/batch-worker-feature.jpg"]
 type = "post"
 [twitter]
   card = "A new Zeebe Node worker allows you to batch access to external resources, for great justice."
