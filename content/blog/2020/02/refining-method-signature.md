@@ -4,11 +4,11 @@ categories = ["javascript", "programming", "zeebe", "typescript"]
 date = "2020-02-29"
 title = "Providing a method signature overload for Zeebe Node's `createWorker` using TypeScript"
 description = "TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!"
-featured = "zeebe-overload.png"
+featured = "zeebe-overload-feature.png"
 featuredalt = ""
 featuredpath = "date"
 linktitle = ""
-image = "/img/2020/02/zeebe-overload.png"
+image = "/img/2020/02/zeebe-overload-feature.png"
 type = "post"
 [twitter]
   card = "TypeScript allows signature overloads, but it takes some behind-the-scenes work. Code so you never have to do it!"
