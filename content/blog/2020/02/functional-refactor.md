@@ -56,7 +56,9 @@ The issue with this implementation is that we cannot return information about _m
 
 I would like it to read all the files, and exit if one or more are missing with a list of _all_ missing files.
 
-## Refactor Without fp-ts
+<a name = "refactor-without-fp-ts"></a>
+
+## [Refactor Without fp-ts](#refactor-without-fp-ts)
 
 This could actually be accomplished by mapping the array with a file reader function and returning `{buffer}` or `{error}` objects, then reducing that, then either throwing or constructing the request, like this:
 
