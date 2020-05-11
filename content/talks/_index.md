@@ -10,25 +10,29 @@ date = "2014-04-10"
 <div class="iframe-container">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/lcab4NEp65M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-2017 - "State Mutation considered harmful" (_back when I could type as fast as I could think; before I switched to Dvorak, then Colemak, then Halmak..._)
+2017 - "State Mutation considered harmful" (_back when I could type as fast as I could think; before I switched to Dvorak, then Colemak, then Halmak..._) (Update: May 2020, my typing speed on Halmak is getting back to my previous speed).
 
 ## Upcoming Talks
 
+* None scheduled at the moment. Check the [BrisJS meetup schedule](https://www.meetup.com/BrisJS/), because I'm a fairly regular speaker there.
 
 ## Previous Talks
 
 ### 2020
 
-* Seeing is Believing: Creating Video Content for Users by live streaming on Twitch [LinuxConf AU 2020](https://linux.conf.au/) [[<i class='fab fa-youtube'></i> video](https://youtu.be/T3gMT-rDNEE)
+* Five Lessons from refactoring StackOverflow code that will make your JS coding journey 253% easier - [BrisJS](https://www.meetup.com/BrisJS/events/fxdfkrybchbgb/) [[<i class='fab fa-youtube'></i> video ](https://youtu.be/rLzljZmdBNM?t=3075)| [repo ](https://github.com/jwulf/five-things-from-stackoverflow-brisjs)]
+* Coder Academy Mentor talk (impact of Coronavirus and global depression) - [[ video ](https://youtu.be/g0YyLjNEO8g)]
+* ES2020 Features that you can use _now_ with TypeScript [BrisJS](https://www.meetup.com/BrisJS/events/fxdfkrybcgbjb/) [[<i class='fab fa-youtube'></i> video ](https://www.youtube.com/watch?v=3VIpSN5-Cts&t=3110s)|[ repo ](https://github.com/jwulf/es2020-ts)]
+* Seeing is Believing: Creating Video Content for Users by live streaming on Twitch [LinuxConf AU 2020](https://linux.conf.au/) [[<i class='fab fa-youtube'></i> video ](https://youtu.be/T3gMT-rDNEE)]
 
 ### 2019
 
 * How live coding on Twitch made me a better developer - [BrisJS Meetup](https://www.meetup.com/BrisJS/events/fxdfkryzqbdb/)
 * Coder Academy Mentor Session - [Coder Academy](https://twitter.com/ashlebug/status/1192286109738225665)
-* API Servers with NestJS - [BrisJS Meetup](https://www.meetup.com/BrisJS/events/fxdfkryzpbgb/) [[<i class='fab fa-youtube'></i> video](https://www.youtube.com/watch?v=9w3Zp3mphPQ)]
+* API Servers with NestJS - [BrisJS Meetup](https://www.meetup.com/BrisJS/events/fxdfkryzpbgb/) [[<i class='fab fa-youtube'></i> video ](https://www.youtube.com/watch?v=9w3Zp3mphPQ)]
 * Zeebe Deep-dive - [Platform Engineers Meetup, Sydney](https://www.meetup.com/Sydney-PE/events/264546925/)
-* Building Scalable (and maintainable) Microservices with JavaScript - [CampJS X](https://x.campjs.org/speakers) [[<i class='fab fa-youtube'></i> video](https://youtu.be/mxuyZ85zegQ)
-* Meet a Minecrafter - Mojang [[<i class='fab fa-youtube'></i> video](https://www.youtube.com/watch?v=8xbnDMuFdQ0)]
+* Building Scalable (and maintainable) Microservices with JavaScript - [CampJS X](https://x.campjs.org/speakers) [[<i class='fab fa-youtube'></i> video ](https://youtu.be/mxuyZ85zegQ)]
+* Meet a Minecrafter - Mojang [[<i class='fab fa-youtube'></i> video ](https://www.youtube.com/watch?v=8xbnDMuFdQ0)]
 * State Machines - [BrisJS Meetup](https://www.meetup.com/BrisJS/events/mhnwzqyzlbhb/)
 * How to get a job through contributing to Open Source - [Node Meetup](https://twitter.com/stephsocial_/status/1132938056460144640)
 * Coder Academy Mentor Session - [Coder Academy](https://twitter.com/ashlebug/status/1115860438493880320)
