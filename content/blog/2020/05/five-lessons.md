@@ -50,13 +50,15 @@ In the BrisJS talk, I cover the top five things that, I believe, will most impro
 
 Use `const` for _everything_. Anything that is left is part of a state machine, and should be encapsulated.
 
-Understand that arrays and objects, and should be declared as `const`, even if you push to them. And if you push to an array, it's a state machine.
+Understand that arrays and objects are _object references_, and should be declared as `const`. It's a common misconception that the array contents are immutable if declared as `const`.
+
+The object reference of an array is unchanged, even if you modify _the contents_ of the array. And if you push to an array, it's a _state machine_ - so you should refer to the next point.
 
 See the article [Shun the Mutant](https://www.joshwulf.com/blog/2020/02/shun-the-mutant/) on my blog.
 
 ### 1. Global Mutable State
 
-Any genuine variables represent actual mutable state - which is rare in a program. Things like time, the state of the network connection, a current score, are variables. And they belong in state machines with immutable-value returning interfaces. See [01-global-mutable-state.js](https://github.com/jwulf/five-things-from-stackoverflow-brisjs/blob/master/01-global-mutable-state.js), and the article [Avoid Global State]( https://www.joshwulf.com/blog/2020/02/avoid-global-state/) on my blog.
+Any genuine variables in a program represent actual mutable state - which is rare in a program. Things like time, the state of the network connection, a current score, are variables. And they belong in state machines with immutable-value-returning interfaces. See [01-global-mutable-state.js](https://github.com/jwulf/five-things-from-stackoverflow-brisjs/blob/master/01-global-mutable-state.js), and the article [Avoid Global State]( https://www.joshwulf.com/blog/2020/02/avoid-global-state/) on my blog.
 
 ### 2. Loops
 
