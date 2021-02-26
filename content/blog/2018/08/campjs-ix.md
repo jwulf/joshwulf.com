@@ -100,11 +100,11 @@ I know that I look forward each year to hear what Kevin Yank’s team has been d
 
 ## Ludum Dare Game Jam
 
-{{< tweet 1026412413816516608 >}}
+<!-- {{< tweet 1026412413816516608 >}} -->
 
 Nathan Hoad and Lilly Piri ran a Game Jam during the camp, synchronised with the global [Ludum Dare Game Jam](https://ldjam.com/). The theme this year was “_Running out of space_”. Participants demoed their games on Sunday night. There were some hilarious moments — Colin wrote a side-scrolling platformer whose essential game mechanic was driven by the player filling the their hard drive with data. To complete the first level takes two bytes, the second takes seven. It increases exponentially, so to get past level 25 the game asks you to drop a 1TB file on your hard drive.
 
-{{< tweet 1026415209223602176 >}}
+<!-- {{< tweet 1026415209223602176 >}} -->
 
 Ben O’Neill won the prize for the best game with a top-down scroller.
 
@@ -140,7 +140,7 @@ There will be a video of it, and I’m looking forward to watching it, both beca
 
 ## Shout out to this year’s organisers
 
-{{< tweet 1026411970063302656 >}}
+<!-- {{< tweet 1026411970063302656 >}} -->
 
 This year, Kartik Gupta played a pivotal role in organising Camp JS.
 
