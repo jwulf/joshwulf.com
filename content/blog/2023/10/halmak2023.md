@@ -1,7 +1,7 @@
 +++
 author = "Josh Wulf"
 categories = ["keyboards"]
-date = "2021-02-26"
+date = "2023-10-26"
 description = "Three years (plus) using the Halmak keyboard layout."
 featured = "halmak.jpeg"
 featuredalt = ""
